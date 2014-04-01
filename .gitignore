@@ -4,3 +4,5 @@
 *.jar
 *.war
 *.ear
+/Maps/nbproject/private/
+/Maps/build/
