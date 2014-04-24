@@ -328,7 +328,6 @@
 				this._altElements.push(altDiv);
 			}
                         
-                        this.fire(alert("asdf"));
 			this.fire('routeselected', {route: this._routes[0]});
 		},
 
@@ -383,7 +382,6 @@
 
 				if (isCurrentSelection) {
 					// TODO: don't fire if the currently active is clicked
-                                        this.fire(alert("hola"));
 					this.fire('routeselected', {route: this._routes[j]});
 				}
 			}
@@ -883,6 +881,7 @@
 					}
 
 					m = L.marker(this._waypoints[i].latLng, options).addTo(this._map);
+                                        this._hookWaypointEvents(m,i);
 				} else {
 					m = null;
 				}
@@ -900,7 +899,18 @@
 					added: arguments
 				});
 			}
-		}
+		},
+                
+                _hookWaypointEvents: function(m, i) {
+                    m.on('click', function(e) {
+                        
+                        this.fire(alert("sdhgjkashg"), this._createWaypointEvent(i,e));
+                    }, this);
+                },
+                
+                _createWaypointEvent: function(i,e) {
+                    return {index: i, latlng: e.target.getLatLng()};
+                }
 	});
 
 	L.Routing.plan = function(waypoints, options) {

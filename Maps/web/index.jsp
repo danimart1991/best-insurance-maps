@@ -128,51 +128,51 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             var map = L.map('map').setView([40.41, -3.68], 13);
             var greenCliente = L.icon({
                 iconUrl: 'Imagenes/green-pin.png',
-                iconSize:     [32, 32], // size of the icon
-                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                iconSize:     [48, 48], // size of the icon
+                iconAnchor:   [24, 47], // point of the icon which will correspond to marker's location
+                popupAnchor:  [0, -45] // point from which the popup should open relative to the iconAnchor
             });
-           var redCliente = L.icon({
+            var redCliente = L.icon({
                 iconUrl: 'Imagenes/red-pin.png',
-                iconSize:     [32, 32], // size of the icon
-                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                iconSize:     [48, 48], // size of the icon
+                iconAnchor:   [24, 47], // point of the icon which will correspond to marker's location
+                popupAnchor:  [0, -45] // point from which the popup should open relative to the iconAnchor
             });
             var greenGrua = L.icon({
                 iconUrl: 'Imagenes/green-grua.png',
-                iconSize:     [32, 32], // size of the icon
-                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                iconSize:     [48, 48], // size of the icon
+                iconAnchor:   [24, 47], // point of the icon which will correspond to marker's location
+                popupAnchor:  [0, -45] // point from which the popup should open relative to the iconAnchor
             });
-           var blueGrua = L.icon({
+            var blueGrua = L.icon({
                 iconUrl: 'Imagenes/blue-grua.png',
-                iconSize:     [32, 32], // size of the icon
-                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                iconSize:     [48, 48], // size of the icon
+                iconAnchor:   [24, 47], // point of the icon which will correspond to marker's location
+                popupAnchor:  [0, -45] // point from which the popup should open relative to the iconAnchor
             });
             var redGrua = L.icon({
                 iconUrl: 'Imagenes/red-grua.png',
-                iconSize:     [32, 32], // size of the icon
-                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                iconSize:     [48, 48], // size of the icon
+                iconAnchor:   [24, 47], // point of the icon which will correspond to marker's location
+                popupAnchor:  [0, -45] // point from which the popup should open relative to the iconAnchor
             });
-           var greenHogar = L.icon({
+            var greenHogar = L.icon({
                 iconUrl: 'Imagenes/green-home.png',
-                iconSize:     [32, 32], // size of the icon
-                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                iconSize:     [48, 48], // size of the icon
+                iconAnchor:   [24, 47], // point of the icon which will correspond to marker's location
+                popupAnchor:  [0, -45] // point from which the popup should open relative to the iconAnchor
             });
             var blueHogar = L.icon({
                 iconUrl: 'Imagenes/blue-home.png',
-                iconSize:     [32, 32], // size of the icon
-                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                iconSize:     [48, 48], // size of the icon
+                iconAnchor:   [24, 47], // point of the icon which will correspond to marker's location
+                popupAnchor:  [0, -45] // point from which the popup should open relative to the iconAnchor
             });
             var redHogar = L.icon({
                 iconUrl: 'Imagenes/red-home.png',
-                iconSize:     [32, 32], // size of the icon
-                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                iconSize:     [48, 48], // size of the icon
+                iconAnchor:   [24, 47], // point of the icon which will correspond to marker's location
+                popupAnchor:  [0, -45] // point from which the popup should open relative to the iconAnchor
             });
 
             L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -189,12 +189,15 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                         String[] formateado = valor.split("/");
                                 %>
                                 L.marker([<%=formateado[2]%>, <%=formateado[3]%>]
-                                        <% if(formateado[4]=="Grua" && Integer.parseInt(formateado[1])==0){%>, {icon:greenGrua})<%}%>
-                                        <% if(formateado[4]=="Grua" && Integer.parseInt(formateado[1])>0 && Integer.parseInt(formateado[1])<3){%>, {icon:blueGrua}<%}%>
-                                        <% if(formateado[4]=="Grua" && Integer.parseInt(formateado[1])>3){%>, {icon:redGrua})<%}%>
-                                        <% if(formateado[4]=="Hogar" && Integer.parseInt(formateado[1])==0){%>, {icon:greenHogar})<%}%>
-                                        <% if(formateado[4]=="Hogar" && Integer.parseInt(formateado[1])>0 && Integer.parseInt(formateado[1])<3){%>, {icon:blueHogar}<%}%>
-                                        <% if(formateado[4]=="Hogar" && Integer.parseInt(formateado[1])>3){%>, {icon:redHogar})<%}%>).addTo(map)
+                                        <% if(formateado[4].equals("Grua")){
+                                                if(Integer.parseInt(formateado[1])==0){%>, {icon:greenGrua}
+                                            <%} else if(Integer.parseInt(formateado[1])>0 && Integer.parseInt(formateado[1])<3){%>, {icon:blueGrua}
+                                            <%} else if(Integer.parseInt(formateado[1])>3){%>, {icon:redGrua}
+                                        <%}} else {
+                                                if(Integer.parseInt(formateado[1])==0){%>, {icon:greenHogar}
+                                            <%} else if(Integer.parseInt(formateado[1])>0 && Integer.parseInt(formateado[1])<3){%>, {icon:blueHogar}
+                                            <%} else if(Integer.parseInt(formateado[1])>3){%>, {icon:redHogar}
+                                        <%}}%>).addTo(map)
                     .bindPopup("<b>Profesional <%=formateado[0]%></b><br />Estado <%=formateado[1]%>.").openPopup();
                                 <%
                                     };
@@ -207,7 +210,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                         String valor = (String) itC.next();
                                         String[] formateado = valor.split("/");
                                 %>
-                                L.marker([<%=formateado[2]%>, <%=formateado[3]%>]<% if(formateado[1]=="t"){%>, {icon:greenCliente}<%}else{%>, {icon:redCliente}<%}%>
+                                L.marker([<%=formateado[2]%>, <%=formateado[3]%>]<% if(formateado[1].equals("t")){%>, {icon:greenCliente}<%}else{%>, {icon:redCliente}<%}%>
                                            ).addTo(map)
                     .bindPopup("<b>Cliente <%=formateado[0]%> </b><br />Estado <%=formateado[1]%>.").openPopup();
                                 <%
