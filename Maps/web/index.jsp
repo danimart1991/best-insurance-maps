@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
         <link rel="stylesheet" href="leaflet.css" />
         <link rel="stylesheet" href="generico.css" />
+        <link rel="stylesheet" href="leaflet-routing-machine.css" />
     </head>
 
     <body>
@@ -43,6 +44,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                   <div id="map" style="width: 900px; height: 550px"></div>
 
         <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+        <script src="leaflet-routing-machine.js"></script>
         <script>
 
             var map = L.map('map').setView([40.41, -3.68], 13);
@@ -66,9 +68,15 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                 [51.503, -0.06],
                 [51.51, -0.047]
             ]).addTo(map).bindPopup("I am a polygon.");
+            
+            L.Routing.control({
+                waypoints: [
+                    L.latLng(57.74, 11.94),
+                    L.latLng(57.6792, 11.949)
+                ]
+            }).addTo(map);
 
-
-            var popup = L.popup();
+            var popup = L.popup();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 
             function onMapClick(e) {
                 popup
