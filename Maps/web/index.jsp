@@ -57,22 +57,29 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             L.marker([40.41, -3.68]).addTo(map)
                     .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
 
-            L.circle([51.508, -0.11], 500, {
+            L.circle([41.41, -2.11], 500, {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5
             }).addTo(map).bindPopup("I am a circle.");
 
             L.polygon([
-                [51.509, -0.08],
-                [51.503, -0.06],
-                [51.51, -0.047]
+                [40.509, -3.08],
+                [40.503, -3.06],
+                [40.51, -3.047]
             ]).addTo(map).bindPopup("I am a polygon.");
             
             L.Routing.control({
                 waypoints: [
-                    L.latLng(57.74, 11.94),
-                    L.latLng(57.6792, 11.949)
+                    L.latLng(41.74, -4.94),
+                    L.latLng(41.6792, -4.949)
+                ]
+            }).addTo(map);
+            
+            L.Routing.control({
+                waypoints: [
+                    L.latLng(42.74, -4.94),
+                    L.latLng(42.6792, -4.949)
                 ]
             }).addTo(map);
 
@@ -85,7 +92,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                         .openOn(map);
             }
 
-            map.on('click', onMapClick);
+            //map.on('click', onMapClick);
 
         </script>
                 </div> <%--Fin del Cabeza--%>

@@ -327,7 +327,8 @@
 				altDiv.appendChild(this._createItineraryTable(alt));
 				this._altElements.push(altDiv);
 			}
-
+                        
+                        this.fire(alert("asdf"));
 			this.fire('routeselected', {route: this._routes[0]});
 		},
 
@@ -382,6 +383,7 @@
 
 				if (isCurrentSelection) {
 					// TODO: don't fire if the currently active is clicked
+                                        this.fire(alert("hola"));
 					this.fire('routeselected', {route: this._routes[j]});
 				}
 			}
@@ -876,17 +878,11 @@
 					icon = (typeof(this.options.waypointIcon) === 'function') ?
 						this.options.waypointIcon(i, this._waypoints[i].name, this._waypoints.length) :
 						this.options.waypointIcon;
-					options = {
-						draggable: true
-					};
 					if (icon) {
 						options.icon = icon;
 					}
 
 					m = L.marker(this._waypoints[i].latLng, options).addTo(this._map);
-					if (this.options.draggableWaypoints) {
-						this._hookWaypointEvents(m, i);
-					}
 				} else {
 					m = null;
 				}
@@ -904,66 +900,6 @@
 					added: arguments
 				});
 			}
-		},
-
-		_hookWaypointEvents: function(m, i) {
-			m.on('dragstart', function(e) {
-				this.fire('waypointdragstart', this._createWaypointEvent(i, e));
-			}, this);
-			m.on('drag', function(e) {
-				this.fire('waypointdrag', this._createWaypointEvent(i, e));
-			}, this);
-			m.on('dragend', function(e) {
-				this.fire('waypointdragend', this._createWaypointEvent(i, e));
-				this._waypoints[i].latLng = e.target.getLatLng();
-				this._waypoints[i].name = '';
-				this._updateWaypointName(i, true);
-				this._fireChanged();
-			}, this);
-		},
-
-		_createWaypointEvent: function(i, e) {
-			return {index: i, latlng: e.target.getLatLng()};
-		},
-
-		dragNewWaypoint: function(e) {
-			var i;
-			this._newWp = {
-				afterIndex: e.afterIndex,
-				marker: L.marker(e.latlng).addTo(this._map),
-				lines: []
-			};
-
-			for (i = 0; i < this.options.dragStyles.length; i++) {
-				this._newWp.lines.push(L.polyline([
-					this._waypoints[e.afterIndex].latLng,
-					e.latlng,
-					this._waypoints[e.afterIndex + 1].latLng
-				], this.options.dragStyles[i]).addTo(this._map));
-			}
-
-			this._markers.splice(e.afterIndex + 1, 0, this._newWp.marker);
-			this._map.on('mousemove', this._onDragNewWp, this);
-			this._map.on('mouseup', this._onWpRelease, this);
-		},
-
-		_onDragNewWp: function(e) {
-			var i;
-			this._newWp.marker.setLatLng(e.latlng);
-			for (i = 0; i < this._newWp.lines.length; i++) {
-				this._newWp.lines[i].spliceLatLngs(1, 1, e.latlng);
-			}
-		},
-
-		_onWpRelease: function(e) {
-			var i;
-			this._map.off('mouseup', this._onWpRelease, this);
-			this._map.off('mousemove', this._onDragNewWp, this);
-			for (i = 0; i < this._newWp.lines.length; i++) {
-				this._map.removeLayer(this._newWp.lines[i]);
-			}
-			this.spliceWaypoints(this._newWp.afterIndex + 1, 0, e.latlng);
-			delete this._newWp;
 		}
 	});
 
@@ -991,7 +927,7 @@
 			}
 
 			L.Routing.Itinerary.prototype.initialize.call(this, this._router, options);
-
+                        
 			this.on('routeselected', this._routeSelected, this);
 			this._plan.on('waypointschanged', this._route, this);
 
@@ -1040,12 +976,6 @@
 			this._line.addTo(this._map);
 			this._map.fitBounds(this._line.getBounds());
 			this._hookEvents(this._line);
-		},
-
-		_hookEvents: function(l) {
-			l.on('linetouched', function(e) {
-				this._plan.dragNewWaypoint(e);
-			}, this);
 		},
 
 		_route: function() {
