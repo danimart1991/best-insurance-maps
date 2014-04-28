@@ -92,7 +92,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                         .openOn(map);
             }
 
-            //map.on('click', onMapClick);
+            map.on('click', onMapClick);
 
         </script>
                 </div> <%--Fin del Cabeza--%>
