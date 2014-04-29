@@ -411,6 +411,44 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             }
 
             map.on('click', onMapClick);
+            
+            function sacadatosURL(){
+            
+            <%
+                if (request.getParameter("id_incidencia") != null) {
+                     if (request.getParameter("id_incidencia").equals("id_incidencia")) {
+                        String idincidencia = request.getParameter("id_incidencia");
+                     }
+                }
+
+                if (request.getParameter("direccion") != null) {
+                     if (request.getParameter("direccion").equals("direccion")) {
+                        String direccion = request.getParameter("direccion");
+                        obtenerlatitudlongitud(direccion);
+                     }
+                }
+            
+                if (request.getParameter("profesion") != null) {
+                     if (request.getParameter("profesion").equals("profesion")) {
+                        String profesion = request.getParameter("profesion");
+                     }
+                }
+                
+                if (request.getParameter("profesional") != null) {
+                     if (request.getParameter("profesional").equals("profesional")) {
+                        String profesional = request.getParameter("profesional");
+                        //buscar anulando ese profesional
+                        
+                     }
+                }
+                else{
+                    //buscar con todos los profesionales
+                }
+                
+                //guardar en la bbdd
+            
+            %> 
+            }
 
         </script>
         
