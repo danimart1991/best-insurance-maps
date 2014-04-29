@@ -53,6 +53,14 @@ public class controlador extends HttpServlet {
         ArrayList<String> datosTodosIncidencias = null;
         datosTodosIncidencias = bd.datosTodosIncidencias();
         req.setAttribute("datosTodosIncidencias", datosTodosIncidencias);
+        
+         String idc = "";
+         idc=(String) req.getParameter("cliente");
+         String prof = "";
+         prof=(String) req.getParameter("profesional");
+         String posicionIncdProfesio = null;
+         posicionIncdProfesio= bd.posicionesIncdProfe(prof,idc);
+         req.setAttribute("posicionIncdProfesio", posicionIncdProfesio);
     }
     
     
@@ -85,7 +93,7 @@ public class controlador extends HttpServlet {
                 //Posicion de origen del cliente
                 String Origen= lat+","+lon;
                 
-                
+                bd.eliminarDistanciasTiempos();
                 //Aray con todas las posiciones de los profesionales
                 ArrayList<String> datosTodosP = null;
                 datosTodosP = bd.posicionTodosProfesionales();
