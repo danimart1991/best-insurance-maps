@@ -492,13 +492,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                 }
                 
                 
-                
-                Conexion c = new Conexion();
-                c.abrirConexion();
-                     //c.actualizar
-           //c.actualizar
-                //c.insertar si no es posible la actualizacion
-                c.cerrarConexion();
+               
                 //guardar en la bbdd
             
             %> 
