@@ -424,7 +424,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                 if (request.getParameter("direccion") != null) {
                      if (request.getParameter("direccion").equals("direccion")) {
                         String direccion = request.getParameter("direccion");
-                        obtenerlatitudlongitud(direccion);
+                        //obtenerlatitudlongitud(direccion);
                      }
                 }
             
