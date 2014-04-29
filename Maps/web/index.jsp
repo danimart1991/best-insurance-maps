@@ -424,7 +424,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                 if (request.getParameter("direccion") != null) {
                      if (request.getParameter("direccion").equals("direccion")) {
                         String direccion = request.getParameter("direccion");
-                        //obtenerlatitudlongitud(direccion);
+                        %>String latlong = obtenerlatitudlongitud(direccion)<%;
                      }
                 }
             
@@ -445,10 +445,44 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                     //buscar con todos los profesionales
                 }
                 
+                
+                
+                Conexion c = new Conexion();
+                c.abrirConexion();
+                     //c.actualizar
+           //c.actualizar
+                //c.insertar si no es posible la actualizacion
+                c.cerrarConexion();
                 //guardar en la bbdd
             
             %> 
             }
+            
+            function obtenerlatitudlongitud(d){
+                var geocoder = new google.maps.Geocoder();
+
+                var address = d;
+                geocoder.geocode( { 'address': address}, function(results, status) {
+                
+                if (status === google.maps.GeocoderStatus.OK) {
+
+                    var latitude = results[0].geometry.location.lat();
+
+                    var  longitude = results[0].geometry.location.lng();
+
+                    String latlong = new String[][];
+                    latlong[0]= latitude;
+                    latlong[1]=longitude;
+                    return latlong;
+                    //alert('La longitud es: ' + longitude + ', la latitud es: ' + latitude);
+
+                    } 
+                });
+                
+            }
+            
+            
+            
 
         </script>
         
