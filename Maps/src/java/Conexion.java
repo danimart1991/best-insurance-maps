@@ -73,9 +73,9 @@ public ArrayList<String>  datosTodosIncidencias() {
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
         set = conexion.createStatement();
-        rs = set.executeQuery("select id_incidencia,atendido,ST_X(ST_GeomFromText(ST_AsText(posicionincidencia))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(posicionincidencia))) as latitud from incidencia");
+        rs = set.executeQuery("select id_profesional ,id_incidencia,atendido,ST_X(ST_GeomFromText(ST_AsText(posicionincidencia))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(posicionincidencia))) as latitud from incidencia");
         while (rs.next()){
-            cadena.add(rs.getString("id_incidencia")+"/"+rs.getString("atendido")+"/"+rs.getString("latitud")+"/"+rs.getString("longitud"));
+            cadena.add(rs.getString("id_incidencia")+"/"+rs.getString("atendido")+"/"+rs.getString("latitud")+"/"+rs.getString("longitud")+"/"+rs.getString("id_profesional"));
         }
         rs.close();
         set.close();
@@ -105,6 +105,25 @@ public String  datosIncidencia(String cliente) {
 }
 
 //Metodo que devuelve los profesionales
+public String  posicionesIncdProfe(String profesion,String inc) {
+     String cadena= " ";
+    try{
+        set = conexion.createStatement();
+        rs = set.executeQuery("select ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud ,ST_X(ST_GeomFromText(ST_AsText(incidencia.posicionincidencia))) as longitudid, ST_Y(ST_GeomFromText(ST_AsText(incidencia.posicionincidencia))) as latitudid from profesional INNER JOIN incidencia on profesional.id_profesional=incidencia.id_profesional");
+        while (rs.next()){
+            cadena=(rs.getString("latitud")+"/"+rs.getString("longitud")+"/"+rs.getString("latitudid")+"/"+rs.getString("longitudid"));
+        }
+        rs.close();
+        set.close();
+        
+    }catch(Exception e){
+        System.out.println("ERROR: Fallo al mostrar los Profesionales e Incidencias");
+    }
+    return cadena;
+}
+
+
+//Metodo que devuelve los profesionales mas rapidos
 public ArrayList<String>  datosProfesionalesRapidos(String profesion,String numero) {
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
@@ -123,7 +142,7 @@ public ArrayList<String>  datosProfesionalesRapidos(String profesion,String nume
 }
 
 
-//Metodo que devuelve los profesionales
+//Metodo que devuelve los profesionales mas cercanos
 public ArrayList<String>  datosProfesionalesCorto(String profesion,String numero) {
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
@@ -143,7 +162,6 @@ public ArrayList<String>  datosProfesionalesCorto(String profesion,String numero
 
 
 
-//Metodo para insertar un nuevo profesor en la base de datos que no tenga un DNIP ya existente
 public void insertarDistanciasTiempos(String profesional,String incidencia,String distancia,String tiempo) {
     try {
         set = conexion.createStatement();
@@ -154,6 +172,17 @@ public void insertarDistanciasTiempos(String profesional,String incidencia,Strin
     }
 }
 
+
+
+public void eliminarDistanciasTiempos() {
+    try{
+        set = conexion.createStatement();
+        set.executeUpdate("Delete from datosruta");
+        set.close();
+    }catch(Exception e){
+        System.out.println("ERROR: Fallo en la eliminacion de los datos de Datos Ruta");
+    }
+}
 /*
 *Cierre de la conexion con la base de datos, cuando cerramos la aplicacion
 */

@@ -209,26 +209,28 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                     while (itC.hasNext()) {
                                         String valor = (String) itC.next();
                                         String[] formateado = valor.split("/");
-                                %>
-                                L.marker([<%=formateado[2]%>, <%=formateado[3]%>]<% if(formateado[1].equals("t")){%>, {icon:greenCliente}<%}else{%>, {icon:redCliente}<%}%>
-                                           ).addTo(map)
-                    .bindPopup("<b>Cliente <%=formateado[0]%> </b><br />Estado <%=formateado[1]%>.").openPopup();
-                                <%
+                                                    %>
+                                                    L.marker([<%=formateado[2]%>, <%=formateado[3]%>]<% if(formateado[1].equals("t")){%>, {icon:greenCliente}<%}else{%>, {icon:redCliente}<%}%>
+                                                               ).addTo(map)
+                                        .bindPopup("<b>Cliente <%=formateado[0]%> </b><br />Estado <%=formateado[1]%>.").openPopup();
+                                                    <%
+                                                    if(formateado[4]!= null && formateado[4]!= ""){
+                                                        String posiciones = null;
+                                                        request.setAttribute("incidencia", formateado[0]);
+                                                        request.setAttribute("profesional", formateado[4]);
+                                                        posiciones=(String)request.getAttribute("posicionIncdProfesio");     
+                                                        String[] posic=posiciones.split("/");
+                                                    %>
+                                                        L.Routing.control({
+                                                             waypoints: [
+                                                             L.latLng(<%=formateado[0]%>, <%=formateado[1]%>),
+                                                             L.latLng(<%=formateado[2]%>, <%=formateado[3]%>)
+                                                              ]
+                                                        }).addTo(map);
+                                                     <%   
+                                                    }
                                     };%>
            
-            L.circle([51.508, -0.11], 500, {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5
-            }).addTo(map).bindPopup("I am a circle.");
-
-            L.polygon([
-                [51.509, -0.08],
-                [51.503, -0.06],
-                [51.51, -0.047]
-            ]).addTo(map).bindPopup("I am a polygon.");
-
-
             var popup = L.popup();
 
             function onMapClick(e) {
