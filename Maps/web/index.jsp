@@ -104,7 +104,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                <p><input type="hidden" value="Todos"  name="tipo">
                <div class="tablasListados" >                        
                    <table id="tablas">
-                         <tr> <td>ID</td><td>Estado</td><td>Longitud Latitud</td></tr>
+                       <tr> <td>ID</td><td>Estado</td><td>Longitud</td><td>Latitud</td></tr>
                                 <%
                                     ArrayList<String> datosA = null;
                                     datosA = (ArrayList<String>) request.getAttribute("datosTodosProfesionales");
@@ -112,6 +112,21 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                     Iterator itA = datosA.iterator();
                                     while (itA.hasNext()) {
                                         String valor = (String) itA.next();
+                                        String[] formateado = valor.split("/");
+                                %>
+                                <tr> <td><%=formateado[0]%></td><td><%=formateado[1]%></td><td><%=formateado[2]%></td><td><%=formateado[3]%></td></tr>
+                                <%
+                                    };%>
+                   </table>
+                   <table id="tablaCT">
+                       <tr> <td>ID</td><td>Atendido</td><td>Longitud</td><td>Latitud</td></tr>
+                                <%
+                                    ArrayList<String> datosCT = null;
+                                    datosCT = (ArrayList<String>) request.getAttribute("datosTodosIncidencias");
+
+                                    Iterator itCT = datosCT.iterator();
+                                    while (itCT.hasNext()) {
+                                        String valor = (String) itCT.next();
                                         String[] formateado = valor.split("/");
                                 %>
                                 <tr> <td><%=formateado[0]%></td><td><%=formateado[1]%></td><td><%=formateado[2]%></td><td><%=formateado[3]%></td></tr>
@@ -412,6 +427,44 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             }
 
             map.on('click', onMapClick);
+            
+            function sacadatosURL(){
+            
+            <%
+                if (request.getParameter("id_incidencia") != null) {
+                     if (request.getParameter("id_incidencia").equals("id_incidencia")) {
+                        String idincidencia = request.getParameter("id_incidencia");
+                     }
+                }
+
+                if (request.getParameter("direccion") != null) {
+                     if (request.getParameter("direccion").equals("direccion")) {
+                        String direccion = request.getParameter("direccion");
+                        //obtenerlatitudlongitud(direccion);
+                     }
+                }
+            
+                if (request.getParameter("profesion") != null) {
+                     if (request.getParameter("profesion").equals("profesion")) {
+                        String profesion = request.getParameter("profesion");
+                     }
+                }
+                
+                if (request.getParameter("profesional") != null) {
+                     if (request.getParameter("profesional").equals("profesional")) {
+                        String profesional = request.getParameter("profesional");
+                        //buscar anulando ese profesional
+                        
+                     }
+                }
+                else{
+                    //buscar con todos los profesionales
+                }
+                
+                //guardar en la bbdd
+            
+            %> 
+            }
 
         </script>
         

@@ -56,7 +56,7 @@ public ArrayList<String>  posicionTodosProfesionales() {
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
         set = conexion.createStatement();
-        rs = set.executeQuery("select id_profesional,ST_X(ST_GeomFromText(ST_AsText(posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(posicionprofesional))) as latitud from \"public\".profesional order by id_profesional");
+        rs = set.executeQuery("select id_profesional,ST_X(ST_GeomFromText(ST_AsText(posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(posicionprofesional))) as latitud from \"public\".profesional where ST_X(ST_GeomFromText(ST_AsText(posicionprofesional)))!=0 and ST_Y(ST_GeomFromText(ST_AsText(posicionprofesional)))!=0 order by id_profesional");
         while (rs.next()){
             cadena.add(rs.getString("id_profesional")+"/"+rs.getString("latitud")+"/"+rs.getString("longitud"));
         }
@@ -128,7 +128,7 @@ public ArrayList<String>  datosProfesionalesRapidos(String profesion,String nume
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
         set = conexion.createStatement();
-        rs = set.executeQuery("select profesional.id_profesional,profesional.profesion,profesional.estado,ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud ,datosruta.distancia from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional where profesional.profesion='"+profesion+"' order by datosruta.tiempo asc limit "+ numero);
+        rs = set.executeQuery("select profesional.id_profesional,profesional.profesion,profesional.estado,ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud ,datosruta.distancia from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional where profesional.profesion='"+profesion+"' and where ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0 and ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0  order by datosruta.tiempo asc limit "+ numero);
         while (rs.next()){
             cadena.add(rs.getString("id_profesional")+"/"+rs.getString("estado")+"/"+rs.getString("latitud")+"/"+rs.getString("longitud")+"/"+rs.getString("profesion")+"/"+rs.getString("distancia"));
         }
@@ -147,7 +147,7 @@ public ArrayList<String>  datosProfesionalesCorto(String profesion,String numero
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
         set = conexion.createStatement();
-        rs = set.executeQuery("select profesional.id_profesional,profesional.profesion,profesional.estado,ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud, datosruta.tiempo from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional where profesional.profesion='"+profesion+"' order by datosruta.distancia asc limit "+ numero);
+        rs = set.executeQuery("select profesional.id_profesional,profesional.profesion,profesional.estado,ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud, datosruta.tiempo from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional where profesional.profesion='"+profesion+"' and where ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0 and ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0  order by datosruta.distancia asc limit "+ numero);
         while (rs.next()){
             cadena.add(rs.getString("id_profesional")+"/"+rs.getString("estado")+"/"+rs.getString("latitud")+"/"+rs.getString("longitud")+"/"+rs.getString("profesion")+"/"+rs.getString("tiempo"));
         }
@@ -172,7 +172,46 @@ public void insertarDistanciasTiempos(String profesional,String incidencia,Strin
     }
 }
 
+public void insertarIncidencia(String incid,String lati,String longi) {
+    try {
+        set = conexion.createStatement();
+        set.executeUpdate("insert into incidencia (id_incidencia,atendido,id_profesional,posicionincidencia)values('"+incid+"','f','',ST_GeographyFromText('POINT('||"+longi+"||' '||"+lati+"||')'))" );
+        set.close();
+    }catch(Exception e){
+        System.out.println("ERROR: Fallo en la inserccion de los datos de ruta");
+    }
+}
 
+public void ModificasIncidencia(String incid,String prof) {
+      try{
+        set = conexion.createStatement();
+        set.executeUpdate("UPDATE incidencia SET id_profesional='"+prof+"',atendido='t' WHERE id_incidencia ="+incid);
+        set.close();
+    }catch(Exception e){
+        System.out.println("ERROR: Fallo en la modificacion de los datos de Tribunal");
+    }
+}
+
+
+public boolean existeIncidencia(String id) {
+    boolean existe = false;
+    String cadena;
+    try{
+        set = conexion.createStatement();
+        rs = set.executeQuery("SELECT * FROM incidencia");
+        while (rs.next()){
+          cadena =rs.getString("id_incidencia");
+            if (cadena.equals(id)){
+                return true;//La matricula existe en la base de datos
+            }
+        }
+        rs.close();
+        set.close();
+    }catch(Exception e){
+        System.out.println("No lee de la tabla Alumno para la comprobacion de la Matricula");
+    }
+return(existe);
+}
 
 public void eliminarDistanciasTiempos() {
     try{
