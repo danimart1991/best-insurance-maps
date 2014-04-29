@@ -118,7 +118,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                 <%
                                     };%>
                    </table>
-                   <table id="tablas">
+                   <table id="tablaCT">
                        <tr> <td>ID</td><td>Atendido</td><td>Longitud</td><td>Latitud</td></tr>
                                 <%
                                     ArrayList<String> datosCT = null;
