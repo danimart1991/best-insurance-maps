@@ -124,11 +124,11 @@ public String  posicionesIncdProfe(String profesion,String inc) {
 
 
 //Metodo que devuelve los profesionales mas rapidos
-public ArrayList<String>  datosProfesionalesRapidos(String profesion,String numero) {
+public ArrayList<String>  datosProfesionalesRapidos(String profesion,String numero,String posicion) {
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
         set = conexion.createStatement();
-        rs = set.executeQuery("select profesional.id_profesional,profesional.profesion,profesional.estado,ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud ,datosruta.distancia from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional where profesional.profesion='"+profesion+"' and where ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0 and ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0  order by datosruta.tiempo asc limit "+ numero);
+        rs = set.executeQuery("select profesional.id_profesional,profesional.profesion,profesional.estado,ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud ,datosruta.distancia from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional where profesional.profesion='"+profesion+"' and ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0 and ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0  and ST_distance((select posicionincidencia from incidencia where id_incidencia=datosruta.id_incidencia),profesional.posicionprofesional)>profesional.radio_zona order by datosruta.tiempo asc limit "+ numero);
         while (rs.next()){
             cadena.add(rs.getString("id_profesional")+"/"+rs.getString("estado")+"/"+rs.getString("latitud")+"/"+rs.getString("longitud")+"/"+rs.getString("profesion")+"/"+rs.getString("distancia"));
         }
@@ -143,11 +143,11 @@ public ArrayList<String>  datosProfesionalesRapidos(String profesion,String nume
 
 
 //Metodo que devuelve los profesionales mas cercanos
-public ArrayList<String>  datosProfesionalesCorto(String profesion,String numero) {
+public ArrayList<String>  datosProfesionalesCorto(String profesion,String numero, String posicion) {
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
         set = conexion.createStatement();
-        rs = set.executeQuery("select profesional.id_profesional,profesional.profesion,profesional.estado,ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud, datosruta.tiempo from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional where profesional.profesion='"+profesion+"' and where ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0 and ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0  order by datosruta.distancia asc limit "+ numero);
+        rs = set.executeQuery("select profesional.id_profesional,profesional.profesion,profesional.estado,ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud, datosruta.tiempo from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional where profesional.profesion='"+profesion+"' and where ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0 and ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional)))!=0 and ST_distance((select posicionincidencia from incidencia where id_incidencia=datosruta.id_incidencia),profesional.posicionprofesional)>profesional.radio_zona order by datosruta.distancia asc limit "+ numero);
         while (rs.next()){
             cadena.add(rs.getString("id_profesional")+"/"+rs.getString("estado")+"/"+rs.getString("latitud")+"/"+rs.getString("longitud")+"/"+rs.getString("profesion")+"/"+rs.getString("tiempo"));
         }

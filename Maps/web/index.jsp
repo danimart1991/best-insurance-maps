@@ -136,12 +136,12 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                    <table id="tablaCT">
                        <tr> <td>ID</td><td>Atendido</td><td>Longitud</td><td>Latitud</td></tr>
                                 <%
-                                    ArrayList<String> datosCT = null;
-                                    datosCT = (ArrayList<String>) request.getAttribute("datosTodosIncidencias");
+                                    ArrayList<String> datosCT1 = null;
+                                    datosCT1 = (ArrayList<String>) request.getAttribute("datosTodosIncidencias");
 
-                                    Iterator itCT = datosCT.iterator();
-                                    while (itCT.hasNext()) {
-                                        String valor = (String) itCT.next();
+                                    Iterator itCT1 = datosCT1.iterator();
+                                    while (itCT1.hasNext()) {
+                                        String valor = (String) itCT1.next();
                                         String[] formateado = valor.split("/");
                                 %>
                                 <tr> <td><%=formateado[0]%></td><td><%=formateado[1]%></td><td><%=formateado[2]%></td><td><%=formateado[3]%></td></tr>
@@ -151,12 +151,12 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                    <table id="tablaCT">
                        <tr> <td>ID</td><td>Atendido</td><td>Longitud</td><td>Latitud</td></tr>
                                 <%
-                                    ArrayList<String> datosCT = null;
-                                    datosCT = (ArrayList<String>) request.getAttribute("datosTodosIncidencias");
+                                    ArrayList<String> datosCT2 = null;
+                                    datosCT2 = (ArrayList<String>) request.getAttribute("datosTodosIncidencias");
 
-                                    Iterator itCT = datosCT.iterator();
-                                    while (itCT.hasNext()) {
-                                        String valor = (String) itCT.next();
+                                    Iterator itCT2 = datosCT2.iterator();
+                                    while (itCT2.hasNext()) {
+                                        String valor = (String) itCT2.next();
                                         String[] formateado = valor.split("/");
                                 %>
                                 <tr> <td><%=formateado[0]%></td><td><%=formateado[1]%></td><td><%=formateado[2]%></td><td><%=formateado[3]%></td></tr>

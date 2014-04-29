@@ -111,15 +111,15 @@ public class controlador extends HttpServlet {
                     String[] tiempo=respuesta[10].split("}");
                     bd.insertarDistanciasTiempos(format[0],formateado[2],distancia[0],tiempo[0]);
                 }
-                
+                String posicion=formateado[0]+" "+formateado[1];
                 /*Array con todos los profesionales*/
                 ArrayList<String> datosProfesionalesRapidos = null;
-                datosProfesionalesRapidos = bd.datosProfesionalesRapidos(profesion,numero);
+                datosProfesionalesRapidos = bd.datosProfesionalesRapidos(profesion,numero,posicion);
                 req.setAttribute("datosProfesionalesRapidos", datosProfesionalesRapidos);
                 
                 /*Array con todos los profesionales*/
                 ArrayList<String> datosProfesionalesCorto = null;
-                datosProfesionalesCorto = bd.datosProfesionalesCorto(profesion,numero);
+                datosProfesionalesCorto = bd.datosProfesionalesCorto(profesion,numero,posicion);
                 req.setAttribute("datosProfesionalesCorto", datosProfesionalesCorto);
                  
            }
