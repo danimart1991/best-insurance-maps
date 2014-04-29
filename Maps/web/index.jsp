@@ -464,6 +464,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                 if (request.getParameter("id_incidencia") != null) {
                      if (request.getParameter("id_incidencia").equals("id_incidencia")) {
                         String idincidencia = request.getParameter("id_incidencia");
+                        request.getAttribute("id_incidencia");
                      }
                 }
 
@@ -471,18 +472,21 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                      if (request.getParameter("direccion").equals("direccion")) {
                         String direccion = request.getParameter("direccion");
                         %>String latlong = obtenerlatitudlongitud(direccion)<%;
+                        request.getAttribute("latlong");
                      }
                 }
             
                 if (request.getParameter("profesion") != null) {
                      if (request.getParameter("profesion").equals("profesion")) {
                         String profesion = request.getParameter("profesion");
+                        request.getAttribute("profesion");
                      }
                 }
                 
                 if (request.getParameter("profesional") != null) {
                      if (request.getParameter("profesional").equals("profesional")) {
                         String profesional = request.getParameter("profesional");
+                        request.getAttribute("profesional");
                         //buscar anulando ese profesional
                         
                      }
@@ -490,12 +494,9 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                 else{
                     //buscar con todos los profesionales
                 }
-                
-                
-               
                 //guardar en la bbdd
-            
-            %> 
+            %>
+                    
             }
             
             function obtenerlatitudlongitud(d){

@@ -71,11 +71,16 @@ public class controlador extends HttpServlet {
          String cliente = (String) req.getParameter("cliente");
          String profesion = (String) req.getParameter("profesion");
          String numero= (String)req.getParameter("NumeroProfesional");
+         String idincidencia= (String) req.getParameter("idincidencia");
+         String latlong= (String) req.getParameter("idincidencia");
+         String profesional= (String) req.getParameter("idincidencia");
          req.setAttribute("cliente", cliente);
          req.setAttribute("profesion", profesion);
          req.setAttribute("TipoProfesional", req.getParameter("TipoProfesional"));
          req.setAttribute("NumeroProfesional", req.getParameter("NumeroProfesional"));
-
+         req.setAttribute("idincidencia", idincidencia);
+         req.setAttribute("latlong", latlong);
+         req.setAttribute("profesional", profesional);
        
       //Si ha introducido un cliente  
        if(cliente!= null && !cliente.equals("") && !req.getParameter("TipoProfesional").toString().equals("Ninguno")){  
