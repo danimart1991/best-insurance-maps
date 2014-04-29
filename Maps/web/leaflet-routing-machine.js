@@ -322,6 +322,7 @@
 				altDiv.innerHTML = '<h2>' + alt.name.join(', ') + '</h2>' +
 					'<h3>' + this._formatDistance(alt.summary.total_distance) +
 					', ' + this._formatTime(alt.summary.total_time) + '</h3>';
+                                
 				L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
 
 				altDiv.appendChild(this._createItineraryTable(alt));
