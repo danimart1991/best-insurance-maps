@@ -133,6 +133,21 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                 <%
                                     };%>
                    </table>
+                   <table id="tablaCT">
+                       <tr> <td>ID</td><td>Atendido</td><td>Longitud</td><td>Latitud</td></tr>
+                                <%
+                                    ArrayList<String> datosCT = null;
+                                    datosCT = (ArrayList<String>) request.getAttribute("datosTodosIncidencias");
+
+                                    Iterator itCT = datosCT.iterator();
+                                    while (itCT.hasNext()) {
+                                        String valor = (String) itCT.next();
+                                        String[] formateado = valor.split("/");
+                                %>
+                                <tr> <td><%=formateado[0]%></td><td><%=formateado[1]%></td><td><%=formateado[2]%></td><td><%=formateado[3]%></td></tr>
+                                <%
+                                    };%>
+                   </table>
                </div>
                             
                <div id="map" style="width: 900px; height: 550px"></div>

@@ -321,8 +321,8 @@
 					this._container);
 				altDiv.innerHTML = '<h2>' + alt.name.join(', ') + '</h2>' +
 					'<h3>' + this._formatDistance(alt.summary.total_distance) +
-					', ' + this._formatTime(alt.summary.total_time) + '</h3>';
-                                
+					', ' + this._formatTime(alt.summary.total_time) + '</h3>' + 
+                                        '<form><input type="submit" value="Submit"></form>';
 				L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
 
 				altDiv.appendChild(this._createItineraryTable(alt));
@@ -352,7 +352,8 @@
 			    body = L.DomUtil.create('tbody', '', table),
 			    i,
 			    instr,
-			    row;
+			    row,
+                            button;
 
 			for (i = 0; i < r.instructions.length; i++) {
 				instr = r.instructions[i];
@@ -361,7 +362,7 @@
 					'<td>' + this._instruction(instr, i) + '</td>' +
 					'<td>' + this._formatDistance(instr[2]) + '</td>';
 			}
-
+                        
 			return table;
 		},
 
