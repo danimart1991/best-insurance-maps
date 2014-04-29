@@ -133,11 +133,42 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                 <%
                                     };%>
                    </table>
+                   <table id="tablaCT">
+                       <tr> <td>ID</td><td>Atendido</td><td>Longitud</td><td>Latitud</td></tr>
+                                <%
+                                    ArrayList<String> datosCT1 = null;
+                                    datosCT1 = (ArrayList<String>) request.getAttribute("datosTodosIncidencias");
+
+                                    Iterator itCT1 = datosCT1.iterator();
+                                    while (itCT1.hasNext()) {
+                                        String valor = (String) itCT1.next();
+                                        String[] formateado = valor.split("/");
+                                %>
+                                <tr> <td><%=formateado[0]%></td><td><%=formateado[1]%></td><td><%=formateado[2]%></td><td><%=formateado[3]%></td></tr>
+                                <%
+                                    };%>
+                   </table>
+                   <table id="tablaCT">
+                       <tr> <td>ID</td><td>Atendido</td><td>Longitud</td><td>Latitud</td></tr>
+                                <%
+                                    ArrayList<String> datosCT2 = null;
+                                    datosCT2 = (ArrayList<String>) request.getAttribute("datosTodosIncidencias");
+
+                                    Iterator itCT2 = datosCT2.iterator();
+                                    while (itCT2.hasNext()) {
+                                        String valor = (String) itCT2.next();
+                                        String[] formateado = valor.split("/");
+                                %>
+                                <tr> <td><%=formateado[0]%></td><td><%=formateado[1]%></td><td><%=formateado[2]%></td><td><%=formateado[3]%></td></tr>
+                                <%
+                                    };%>
+                   </table>
                </div>
                             
                <div id="map" style="width: 900px; height: 550px"></div>
 
         <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+        <script src="leaflet-routing-machine.js"></script>
         <script>
 
             var map = L.map('map').setView([40.41, -3.68], 13);
@@ -290,6 +321,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                <div id="map" style="width: 900px; height: 550px"></div>
 
         <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+        <script src="leaflet-routing-machine.js"></script>
         <script>
 
             var map = L.map('map').setView([40.41, -3.68], 13);
@@ -345,7 +377,9 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
             }).addTo(map);
-
+                    
+ 
+ 
                     <% 
                        if (request.getParameter("cliente") != null && !request.getParameter("cliente").toString().equals("")){
                                    
@@ -377,7 +411,13 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                         <% if(formateado[4]=="Hogar" && Integer.parseInt(formateado[1])>0 && Integer.parseInt(formateado[1])<3){%>, {icon:blueHogar}<%}%>
                                         <% if(formateado[4]=="Hogar" && Integer.parseInt(formateado[1])>3){%>, {icon:redHogar})<%}%>).addTo(map)
                     .bindPopup("<b>Profesional <%=formateado[0]%></b><br />Estado <%=formateado[1]%></b><br />Km <%=formateado[5]%>.").openPopup();
-                                <%
+                                        L.Routing.control({
+                                                 waypoints: [
+                                                 L.latLng(<%=formateado[2]%>, <%=formateado[3]%>),
+                                                 L.latLng(<%=formateados[0]%>, <%=formateados[1]%>)
+                                                 ]
+                                        }).addTo(map);
+                                                     <%
                                     };}
                     if (request.getAttribute("TipoProfesional").toString().equals("Corto")) {                
                                     ArrayList<String> datosC = null;
@@ -396,7 +436,13 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                         <% if(formateado[4]=="Hogar" && Integer.parseInt(formateado[1])>3){%>, {icon:redHogar})<%}%>).addTo(map)
                     
                     .bindPopup("<b>Profesional <%=formateado[0]%> </b><br />Estado <%=formateado[1]%> </b><br />Duracion <%=formateado[5]%>.").openPopup();
-                                <%
+                            L.Routing.control({
+                                                 waypoints: [
+                                                 L.latLng(<%=formateado[2]%>, <%=formateado[3]%>),
+                                                 L.latLng(<%=formateados[0]%>, <%=formateados[1]%>)
+                                                 ]
+                                        }).addTo(map);
+                    <%
                                     };}}%>
 
 
