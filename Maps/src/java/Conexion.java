@@ -182,10 +182,31 @@ public void insertarIncidencia(String incid,String lati,String longi) {
     }
 }
 
+
 public void ModificasIncidencia(String incid,String prof) {
       try{
         set = conexion.createStatement();
-        set.executeUpdate("UPDATE incidencia SET id_profesional='"+prof+"',atendido='t' WHERE id_incidencia ="+incid);
+        set.executeUpdate("UPDATE incidencia SET id_profesional='"+prof+"',atendido='t' WHERE id_incidencia ='"+incid+"'");
+        set.close();
+    }catch(Exception e){
+        System.out.println("ERROR: Fallo en la modificacion de los datos de Tribunal");
+    }
+}
+
+public void insertarProfesional(String prof,String tipo,String lati,String longi,String radio,String num) {
+    try {
+        set = conexion.createStatement();
+        set.executeUpdate("insert into profesional (id_profesional,profesion,estado,radio_zona,zona,posicionprofesional)values('"+prof+"','"+tipo+"',"+num+","+radio+",ST_GeographyFromText('POINT('||"+longi+"||' '||"+lati+"||')'),ST_GeographyFromText('POINT(0 0)'))" );
+        set.close();
+    }catch(Exception e){
+        System.out.println("ERROR: Fallo en la inserccion de los datos de ruta");
+    }
+}
+
+public void ModificasProfesional(String prof,String lat,String lon,String num) {
+      try{
+        set = conexion.createStatement();
+        set.executeUpdate("UPDATE profesional SET estado="+num+",posicionprofesional=ST_GeographyFromText('POINT('||"+lon+"||' '||"+lat+"||')') WHERE id_profesional ='"+prof+"'");
         set.close();
     }catch(Exception e){
         System.out.println("ERROR: Fallo en la modificacion de los datos de Tribunal");
