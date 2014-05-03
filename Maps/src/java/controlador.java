@@ -66,20 +66,20 @@ public class controlador extends HttpServlet {
     public void Profesional(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
          HttpSession s = req.getSession(true);
-         String cliente = (String) req.getParameter("cliente");
          String profesion = (String) req.getParameter("profesion");
          String numero= (String)req.getParameter("NumeroProfesional");
-         String idincidencia= (String) req.getParameter("idincidencia");
-         String latlong= (String) req.getParameter("idincidencia");
-         String profesional= (String) req.getParameter("idincidencia");
-         req.setAttribute("cliente", cliente);
+         String lat2= (String) req.getParameter("lat");
+         String lon2= (String) req.getParameter("lon");
+         String cliente = (String) req.getParameter("id_incidencia");
+         
+         req.setAttribute("id_incidencia", cliente);
          req.setAttribute("profesion", profesion);
          req.setAttribute("TipoProfesional", req.getParameter("TipoProfesional"));
          req.setAttribute("NumeroProfesional", req.getParameter("NumeroProfesional"));
-         req.setAttribute("idincidencia", idincidencia);
-         req.setAttribute("latlong", latlong);
-         req.setAttribute("profesional", profesional);
-       
+        
+        // if(!bd.existeIncidencia(cliente)){
+          //   bd.insertarIncidencia(cliente, lat2, lon2);
+         //}
       //Si ha introducido un cliente  
        if(cliente!= null && !cliente.equals("") && !req.getParameter("TipoProfesional").toString().equals("Ninguno")){  
             /*Latitud y Longitud de la incidencia*/

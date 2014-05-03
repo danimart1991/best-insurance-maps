@@ -316,7 +316,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                     <option value="Grua">Grua</option>
                                     <option value="Hogar">Hogar</option>
                 </select> 
-                <p>Cliente<input type="text" name="cliente" title="Solo se aceptan numeros" required></p> 
+                <p>Cliente<input type="text" name="id_incidencia" title="Solo se aceptan numeros" required></p> 
                             
                <div id="map" style="width: 900px; height: 550px"></div>
 
@@ -378,10 +378,36 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                 attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
             }).addTo(map);
                     
+            
+            
+            
+     //           if (request.getParameter("id_incidencia") != null && request.getParameter("direccion") != null && request.getParameter("profesion") != null) {
+     //                     request.setAttribute("id_incidencia", request.getParameter("id_incidencia"));
+     //                      request.setAttribute("profesion", request.getParameter("profesion"));    
+                            
+     //           var geocoder = new google.maps.Geocoder();
+     //           var address = <%request.getParameter("direccion");%>;
+     //           geocoder.geocode( { 'address': address}, function(results, status) {
+     //           var latitude;
+     //           var  longitude;
+     //           if (status === google.maps.GeocoderStatus.OK) {
+
+     //               latitude = results[0].geometry.location.lat();
+     //               longitude = results[0].geometry.location.lng();
+      //          }
+      //              request.setAttribute("lat", latitude);
+      //              request.setAttribute("lon", longitude);
+      //          }   
+                 
+                 ///Falta quitar el profesional en el codigo de abajo
+                
+           //     }
+                
+         
+           <%
  
- 
-                    <% 
-                       if (request.getParameter("cliente") != null && !request.getParameter("cliente").toString().equals("")){
+                    
+                       if (request.getParameter("id_incidencia") != null && !request.getParameter("id_incidencia").toString().equals("")){
                                    
                                     
                                      String vals = null;
@@ -403,6 +429,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                         String valor = (String) itB.next();
                                         String[] formateado = valor.split("/");
                                 %>
+                                    
                                 L.marker([<%=formateado[2]%>, <%=formateado[3]%>]
                                         <% if(formateado[4]=="Grua" && Integer.parseInt(formateado[1])==0){%>, {icon:greenGrua})<%}%>
                                         <% if(formateado[4]=="Grua" && Integer.parseInt(formateado[1])>0 && Integer.parseInt(formateado[1])<3){%>, {icon:blueGrua}<%}%>
