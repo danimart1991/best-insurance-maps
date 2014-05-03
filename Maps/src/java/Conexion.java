@@ -38,7 +38,7 @@ public ArrayList<String>  datosTodosProfesionales() {
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
         set = conexion.createStatement();
-        rs = set.executeQuery("select id_profesional,profesion,estado,ST_X(ST_GeomFromText(ST_AsText(posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(posicionprofesional))) as latitud from \"public\".profesional");
+        rs = set.executeQuery("select id_profesional,profesion,estado,ST_X(ST_GeomFromText(ST_AsText(posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(posicionprofesional))) as latitud from profesional");
         while (rs.next()){
             cadena.add(rs.getString("id_profesional")+"/"+rs.getString("estado")+"/"+rs.getString("latitud")+"/"+rs.getString("longitud")+"/"+rs.getString("profesion"));
         }
@@ -56,7 +56,7 @@ public ArrayList<String>  posicionTodosProfesionales() {
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
         set = conexion.createStatement();
-        rs = set.executeQuery("select id_profesional,ST_X(ST_GeomFromText(ST_AsText(posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(posicionprofesional))) as latitud from \"public\".profesional where ST_X(ST_GeomFromText(ST_AsText(posicionprofesional)))!=0 and ST_Y(ST_GeomFromText(ST_AsText(posicionprofesional)))!=0 order by id_profesional");
+        rs = set.executeQuery("select id_profesional,ST_X(ST_GeomFromText(ST_AsText(posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(posicionprofesional))) as latitud from profesional where ST_X(ST_GeomFromText(ST_AsText(posicionprofesional)))!=0 and ST_Y(ST_GeomFromText(ST_AsText(posicionprofesional)))!=0 order by id_profesional");
         while (rs.next()){
             cadena.add(rs.getString("id_profesional")+"/"+rs.getString("latitud")+"/"+rs.getString("longitud"));
         }
@@ -175,7 +175,7 @@ public void insertarDistanciasTiempos(String profesional,String incidencia,Strin
 public void insertarIncidencia(String incid,String lati,String longi) {
     try {
         set = conexion.createStatement();
-        set.executeUpdate("insert into incidencia (id_incidencia,atendido,id_profesional,posicionincidencia)values('"+incid+"','f','',ST_GeographyFromText('POINT('||"+longi+"||' '||"+lati+"||')'))" );
+        set.executeUpdate("insert into incidencia (id_incidencia,atendido,posicionincidencia)values('"+incid+"','f',ST_GeographyFromText('POINT('||"+longi+"||' '||"+lati+"||')'))" );
         set.close();
     }catch(Exception e){
         System.out.println("ERROR: Fallo en la inserccion de los datos de ruta");

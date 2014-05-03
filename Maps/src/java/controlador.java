@@ -1,7 +1,5 @@
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.servlet.ServletConfig;

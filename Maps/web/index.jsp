@@ -7,9 +7,9 @@
   	<title>Mapa de prueba</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="generico.css" />
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
         <link rel="stylesheet" href="leaflet.css" />
-        <link rel="stylesheet" href="generico.css" />
         <link rel="stylesheet" href="leaflet-routing-machine.css" />
     </head>
 
@@ -101,7 +101,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             <%-- Si el atributo es Todos cargamos sus correspondientes valores --%>
             <% if (formularios.equals("Todos")) {%>
                 <input type="hidden" name="Todos" value="Todos">
-               <p><input type="hidden" value="Todos"  name="tipo">
+                <input type="hidden" value="Todos"  name="tipo">
                <div class="tablasListados" >                        
                    <table id="tablas">
                        <tr> <td>ID</td><td>Estado</td><td>Longitud</td><td>Latitud</td></tr>
@@ -269,8 +269,8 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                                     %>
                                                         L.Routing.control({
                                                              waypoints: [
-                                                             L.latLng(<%=formateado[0]%>, <%=formateado[1]%>),
-                                                             L.latLng(<%=formateado[2]%>, <%=formateado[3]%>)
+                                                             L.latLng(<%=posic[0]%>, <%=posic[1]%>),
+                                                             L.latLng(<%=posic[2]%>, <%=posic[3]%>)
                                                               ]
                                                         }).addTo(map);
                                                      <%   
@@ -457,70 +457,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             }
 
             map.on('click', onMapClick);
-            
-            function sacadatosURL(){
-            
-            <%
-                if (request.getParameter("id_incidencia") != null) {
-                     if (request.getParameter("id_incidencia").equals("id_incidencia")) {
-                        String idincidencia = request.getParameter("id_incidencia");
-                        request.getAttribute("id_incidencia");
-                     }
-                }
-
-                if (request.getParameter("direccion") != null) {
-                     if (request.getParameter("direccion").equals("direccion")) {
-                        String direccion = request.getParameter("direccion");
-                        %>String latlong = obtenerlatitudlongitud(direccion)<%;
-                        request.getAttribute("latlong");
-                     }
-                }
-            
-                if (request.getParameter("profesion") != null) {
-                     if (request.getParameter("profesion").equals("profesion")) {
-                        String profesion = request.getParameter("profesion");
-                        request.getAttribute("profesion");
-                     }
-                }
-                
-                if (request.getParameter("profesional") != null) {
-                     if (request.getParameter("profesional").equals("profesional")) {
-                        String profesional = request.getParameter("profesional");
-                        request.getAttribute("profesional");
-                        //buscar anulando ese profesional
-                        
-                     }
-                }
-                else{
-                    //buscar con todos los profesionales
-                }
-                //guardar en la bbdd
-            %>
-                    
-            }
-            
-            function obtenerlatitudlongitud(d){
-                var geocoder = new google.maps.Geocoder();
-
-                var address = d;
-                geocoder.geocode( { 'address': address}, function(results, status) {
-                
-                if (status === google.maps.GeocoderStatus.OK) {
-
-                    var latitude = results[0].geometry.location.lat();
-
-                    var  longitude = results[0].geometry.location.lng();
-
-                    String latlong = new String[][];
-                    latlong[0]= latitude;
-                    latlong[1]=longitude;
-                    return latlong;
-                    //alert('La longitud es: ' + longitude + ', la latitud es: ' + latitude);
-
-                    } 
-                });
-                
-            }
+         
             
             
             

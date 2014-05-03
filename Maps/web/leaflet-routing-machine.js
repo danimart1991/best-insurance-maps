@@ -352,8 +352,7 @@
 			    body = L.DomUtil.create('tbody', '', table),
 			    i,
 			    instr,
-			    row,
-                            button;
+			    row;
 
 			for (i = 0; i < r.instructions.length; i++) {
 				instr = r.instructions[i];
@@ -805,7 +804,7 @@
 			for (i = e.added.length - 1; i >= 0 ; i--) {
 				geocoderElem = this._createGeocoder(e.index + i);
 				if (e.index >= this._geocoderElems.length) {
-					// lastChild is the "add new wp" button
+					// lastChild is the "add new wp" 
 					beforeElem = this._geocoderContainer.lastChild;
 				} else {
 					beforeElem = this._geocoderElems[e.index];
