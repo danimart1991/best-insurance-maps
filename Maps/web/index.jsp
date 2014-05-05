@@ -278,7 +278,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                     };%>
            
             var popup = L.popup();
-
+            
             function onMapClick(e) {
                 popup
                         .setLatLng(e.latlng)

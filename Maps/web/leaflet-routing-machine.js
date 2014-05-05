@@ -181,8 +181,7 @@
 				{color: 'black', opacity: 0.15, weight: 7},
 				{color: 'white', opacity: 0.8, weight: 4},
 				{color: 'orange', opacity: 1, weight: 2}
-			],
-			addWaypoints: true
+			]
 		},
 
 		initialize: function(route, options) {
@@ -206,9 +205,6 @@
 			for (i = 0; i < this.options.styles.length; i++) {
 				pl = L.polyline(geom, this.options.styles[i])
 					.addTo(map);
-				if (this.options.addWaypoints) {
-					pl.on('mousedown', this._onLineTouched, this);
-				}
 				this._layers.push(pl);
 			}
 		},
@@ -286,7 +282,8 @@
 		includes: L.Mixin.Events,
 
 		options: {
-			units: 'metric'
+			units: 'metric',
+                        showroute: false
 		},
 
 		initialize: function(router, options) {
@@ -325,8 +322,10 @@
                                         '<form><input type="submit" value="Submit"></form>';
 				L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
 
-				altDiv.appendChild(this._createItineraryTable(alt));
-				this._altElements.push(altDiv);
+                                if (this.options.showroute === true) {
+                                    altDiv.appendChild(this._createItineraryTable(alt));
+                                }
+                                    this._altElements.push(altDiv);
 			}
                         
 			this.fire('routeselected', {route: this._routes[0]});
@@ -636,8 +635,9 @@
 				{color: 'white', opacity: 0.8, weight: 4},
 				{color: 'orange', opacity: 1, weight: 2, dashArray: '7,12'}
 			],
-			draggableWaypoints: true,
-			addWaypoints: true
+			draggableWaypoints: false,
+			addWaypoints: false,
+                        showMarkers: false
 		},
 
 		initialize: function(waypoints, options) {
@@ -881,7 +881,7 @@
 						options.icon = icon;
 					}
 
-					m = L.marker(this._waypoints[i].latLng, options).addTo(this._map);
+					m = L.marker(this._waypoints[i].latLng, options);//.addTo(this._map);
                                         this._hookWaypointEvents(m,i);
 				} else {
 					m = null;
@@ -982,7 +982,7 @@
 		_routeSelected: function(e) {
 			var route = e.route;
 			this._clearLine();
-
+                        
 			this._line = L.Routing.line(route);
 			this._line.addTo(this._map);
 			this._map.fitBounds(this._line.getBounds());
