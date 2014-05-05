@@ -11,8 +11,7 @@ public class incidencias {
     public void incidencias(String id, String lat,String lon){
         Conexion db = new Conexion();
         db.abrirConexion();
-        db.insertarIncidencia(id, lat, long);
-        
+        db.insertarIncidencia(id, lat, lon);        
     }
     
     
