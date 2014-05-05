@@ -11,9 +11,9 @@ public class TareaInvocar implements Job {
   //Metodo que se ejecutara cada cierto tiempo que lo programemos despues
   @Override
   public void execute(JobExecutionContext jec) throws JobExecutionException {
-     //LLamada a las posiciones de las Gruas
-     String JSONGruas= llamadas.excutePostJSON("http://172.29.40.136:8888/mapas");
-        java.lang.reflect.Type tipoObjeto = new TypeToken<posiciones>(){}.getType();
+      //LLamada a las posiciones de las Gruas
+      String JSONGruas= llamadas.excutePostJSON("http://172.29.40.136:8888/mapas");
+      java.lang.reflect.Type tipoObjeto = new TypeToken<posiciones>(){}.getType();
       ArrayList<posiciones> grua=gson.fromJson(JSONGruas, tipoObjeto);
       System.out.println("\nJSON A JAVA");
       
