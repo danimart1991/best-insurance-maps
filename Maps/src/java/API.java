@@ -105,5 +105,35 @@ public class API {
     }
   }
 
+ public static String excuteGetJSON(String URL){
+      URL url;
+      //String urlToRead = null;
+      HttpURLConnection connection = null;
+      BufferedReader rd;
+      String line;
+      String result = "";
+      try {
+         url = new URL(URL);
+         connection = (HttpURLConnection) url.openConnection();
+         connection.setRequestMethod("GET");
+         rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+         while ((line = rd.readLine()) != null) {
+            result += line;
+         }
+         rd.close();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }finally {
+
+      if(connection != null) {
+        connection.disconnect(); 
+      }
+      }
+      return result;
+   }
+
+   
+ 
+ 
 }
 
