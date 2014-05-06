@@ -52,6 +52,24 @@ public ArrayList<String>  datosTodosProfesionales() {
 }
 
 //Metodo que devuelve los profesionales
+public ArrayList<String>  bigDataTodosProfesionales() {
+     ArrayList<String>  cadena= new ArrayList<String>();
+    try{
+        set = conexion.createStatement();
+        rs = set.executeQuery("select id_profesional,profesion,estado,ST_X(ST_GeomFromText(ST_AsText(posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(posicionprofesional))) as latitud,radio_zona,ST_X(ST_GeomFromText(ST_AsText(zona))) as longitudzona, ST_Y(ST_GeomFromText(ST_AsText(zona))) as latitudzona  from profesional");
+        while (rs.next()){
+            cadena.add(rs.getString("id_profesional")+"/"+rs.getString("estado")+"/"+rs.getString("latitud")+"/"+rs.getString("longitud")+"/"+rs.getString("profesion")+"/"+rs.getString("radio_zona")+"/"+rs.getString("latitudzona")+"/"+rs.getString("longitudzona"));
+        }
+        rs.close();
+        set.close();
+        
+    }catch(Exception e){
+        System.out.println("ERROR: Fallo al mostrar los Profesionales");
+    }
+    return cadena;
+}
+
+//Metodo que devuelve los profesionales
 public ArrayList<String>  posicionTodosProfesionales() {
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
@@ -68,6 +86,8 @@ public ArrayList<String>  posicionTodosProfesionales() {
     }
     return cadena;
 }
+
+
 //Metodo que devuelve las incidencias
 public ArrayList<String>  datosTodosIncidencias() {
      ArrayList<String>  cadena= new ArrayList<String>();
@@ -156,6 +176,26 @@ public ArrayList<String>  datosProfesionalesCorto(String profesion,String numero
         
     }catch(Exception e){
         System.out.println("ERROR: Fallo al mostrar los Profesionales mas cercanos");
+    }
+    return cadena;
+}
+
+
+
+//Metodo que devuelve los profesionales mas cercanos
+public ArrayList<String>  datosBigDataRutas() {
+     ArrayList<String>  cadena= new ArrayList<String>();
+    try{
+        set = conexion.createStatement();
+        rs = set.executeQuery("select ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud, ST_X(ST_GeomFromText(ST_AsText(incidencia.posicionincidencia))) as longitudfin, ST_Y(ST_GeomFromText(ST_AsText(incidencia.posicionincidencia))) as latitudfin,datosruta.tiempo, datosruta.distancia from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional   INNER JOIN incidencia on incidencia.id_incidencia=datosruta.id_profesional ");
+        while (rs.next()){
+            cadena.add(rs.getString("latitud")+"/"+rs.getString("longitud")+"/"+rs.getString("latitudfin")+"/"+rs.getString("longitudfin")+"/"+rs.getString("distancia")+"/"+rs.getString("tiempo"));
+        }
+        rs.close();
+        set.close();
+        
+    }catch(Exception e){
+        System.out.println("ERROR: Fallo al mostrar las rutas");
     }
     return cadena;
 }
