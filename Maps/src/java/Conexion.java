@@ -187,7 +187,7 @@ public ArrayList<String>  datosBigDataRutas() {
      ArrayList<String>  cadena= new ArrayList<String>();
     try{
         set = conexion.createStatement();
-        rs = set.executeQuery("select ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud, ST_X(ST_GeomFromText(ST_AsText(incidencia.posicionincidencia))) as longitudfin, ST_Y(ST_GeomFromText(ST_AsText(incidencia.posicionincidencia))) as latitudfin,datosruta.tiempo, datosruta.distancia from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional   INNER JOIN incidencia on incidencia.id_incidencia=datosruta.id_profesional ");
+        rs = set.executeQuery("select ST_X(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as longitud, ST_Y(ST_GeomFromText(ST_AsText(profesional.posicionprofesional))) as latitud, ST_X(ST_GeomFromText(ST_AsText(incidencia.posicionincidencia))) as longitudfin, ST_Y(ST_GeomFromText(ST_AsText(incidencia.posicionincidencia))) as latitudfin,datosruta.tiempo, datosruta.distancia from profesional INNER JOIN datosruta on profesional.id_profesional=datosruta.id_profesional   INNER JOIN incidencia on incidencia.id_incidencia=datosruta.id_incidencia ");
         while (rs.next()){
             cadena.add(rs.getString("latitud")+"/"+rs.getString("longitud")+"/"+rs.getString("latitudfin")+"/"+rs.getString("longitudfin")+"/"+rs.getString("distancia")+"/"+rs.getString("tiempo"));
         }

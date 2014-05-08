@@ -5,23 +5,28 @@ import java.util.Iterator;
 
 
 public class incidencias {
-    String id_incidencia;
-    String GPS;
-    String atendido;
-    Conexion db = new Conexion();
-    Gson gson = new Gson(); 
-    ArrayList<incidencias> incidenciasL;
+    private String id_incidencia;
+    private String GPS;
+   private  String atendido;
+    
+   
     private incidencias(String id, String lat,String lon,String estado){
-        db.abrirConexion();
+        super();
         this.id_incidencia=id;
         this.atendido=estado;
         this.GPS=lat+"-"+lon;
     }
-    
+     public incidencias(){
+     super();
+    }
     
     //CONVERTIMOS A JSON    
     public String incidenciasToJSON(){
-       db.abrirConexion();
+        Conexion db = new Conexion();
+        Gson gson = new Gson(); 
+        db.abrirConexion();
+        ArrayList incidenciasL= new ArrayList<incidencias>();
+        String formatoJSON ;
         //Extraemos las incidencias de la base de datos 
         //convertimos la lista de incidencias a formato JSON
         ArrayList<String> datosA = null;
@@ -32,9 +37,11 @@ public class incidencias {
                      String valor = (String) itA.next();
                      String[] formateado = valor.split("/");
                      incidencias emple = new incidencias(formateado[0],formateado[2],formateado[3],formateado[1]);
-                     this.incidenciasL.add(emple);
+                     incidenciasL.add(emple);
+                                        
               }
-        String formatoJSON = gson.toJson(incidenciasL); 
+        formatoJSON = gson.toJson(incidenciasL); 
+        System.out.println(formatoJSON);
         return formatoJSON;
     }
 }

@@ -6,9 +6,7 @@ import java.util.Iterator;
 
 
 public class bigDataEmpleados {
-    
-    Gson gson = new Gson(); 
-    Conexion db = new Conexion();
+   
     String id_empleado;
     String profesion;
     String GPS;
@@ -16,11 +14,11 @@ public class bigDataEmpleados {
     String radio_zona;
     String punto_zona;
     
-     ArrayList<bigDataEmpleados> profesional;
-
- 
-   
+    public bigDataEmpleados(){
+         super();
+    } 
       private bigDataEmpleados(  String id_empleado, String profesion,String lati,String longi,  String estado,String radio_zona,  String latzona,String longzona){
+      super();
       this.GPS=lati+"-"+longi;
       this.estado=estado;
       this.id_empleado=id_empleado;
@@ -30,8 +28,16 @@ public class bigDataEmpleados {
       
       
       }
-     public void generarbigDataEmpleados(){
-             ArrayList<String> datosA = null;
+    
+    
+    //CONVERTIMOS A JSON    
+    public String profesionalesToJSON(){
+         Gson gson = new Gson(); 
+            Conexion db = new Conexion();
+            db.abrirConexion();
+            ArrayList<bigDataEmpleados> profesional=new ArrayList<bigDataEmpleados>();    
+         
+            ArrayList<String> datosA = null;
              datosA = (ArrayList<String>)db.bigDataTodosProfesionales();
 
               Iterator itA = datosA.iterator();
@@ -39,15 +45,8 @@ public class bigDataEmpleados {
                      String valor = (String) itA.next();
                      String[] formateado = valor.split("/");
                      bigDataEmpleados emple = new bigDataEmpleados(formateado[0],formateado[4],formateado[2],formateado[3],formateado[1],formateado[5],formateado[6],formateado[7]);
-                     this.profesional.add(emple);
+                     profesional.add(emple);
               }
-    }
-    
-    //CONVERTIMOS A JSON    
-    public String profesionalesToJSON(){
-        db.abrirConexion();
-        //Extraemos los profesionales de la base de datos 
-        this.generarbigDataEmpleados();
         //convertimos la lista de profesionales a formato JSON
         String formatoJSON = gson.toJson(profesional); 
         return formatoJSON;
