@@ -1,9 +1,11 @@
+package JSON_BIGDATA;
+
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Servlet para la generacion del JSON de Incidencias para BIGDATA
+ * Direccion  http://localhost:8080/Maps/JSONincidencias
  */
 
+import Clases.Incidencias;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,15 +16,16 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = {"/JSONincidencia"})
 public class JSONincidencia extends HttpServlet {
-incidencias id=new incidencias();
-    
+ //Metodo para obtener los datos de todas las incidencias en formato JSON
+    Incidencias id=new Incidencias();
+     
+//Metodo que devuelve el HTML que muestra el JSON de Incidencias por pantalla
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String json=id.incidenciasToJSON();
         try {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -37,29 +40,17 @@ incidencias id=new incidencias();
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    /*
+     * Metodos para las peticiones GET y POST, con la ejecucion del metodo anterior, para que
+     * saque por pantalla el JSON
+    */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

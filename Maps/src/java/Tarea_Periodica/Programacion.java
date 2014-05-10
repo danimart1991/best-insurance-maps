@@ -1,3 +1,7 @@
+package Tarea_Periodica;
+/*
+ * Hilo que ejecuta cada cierto tiempo las tareas contenidas en la clase TareaInvocar
+*/
 
 import static org.quartz.JobBuilder.newJob;
 import org.quartz.JobDetail;
@@ -9,7 +13,7 @@ import org.quartz.Trigger;
 import static org.quartz.TriggerBuilder.newTrigger;
 import org.quartz.impl.StdSchedulerFactory;
 
-// @author Henry Joe Wong Urquiza
+
 
 public class Programacion {
     private Scheduler scheduler=null;
@@ -18,7 +22,7 @@ public class Programacion {
 
         try {
             sf = new StdSchedulerFactory();
-           scheduler = sf.getScheduler();
+            scheduler = sf.getScheduler();
 
         } catch (SchedulerException se) {
             se.printStackTrace();

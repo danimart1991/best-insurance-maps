@@ -1,29 +1,34 @@
+package Clases;
 
+/*
+ * Clase Ruta para la utilizacion de la generacion del JSON para BIG DATA
+*/
+
+import Controladores.Conexion;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class rutas {
+public class Rutas {
+    String id_ruta;
     String inicio;
     String fin;
     String duracion;
     String distancia;
-    String id_ruta;
 
-   public rutas(){
+   public Rutas(){
      super();  
    }
    
-   private rutas( int num, String latini, String longini,String latfin,String longfin,  String dur,String dis){
+   private Rutas( int num, String latini, String longini,String latfin,String longfin,  String dur,String dis){
         super();  
-             this.id_ruta=Integer.toString(num);
+         this.id_ruta=Integer.toString(num);
          num++;
          this.inicio=latini+"-"+longini;
          this.fin=latfin+"-"+longfin;
          this.duracion=dur;
          this.distancia=dis;
-
-      
+ 
       }
   
     
@@ -34,7 +39,7 @@ public class rutas {
     Conexion db = new Conexion();
         db.abrirConexion();
         
-     ArrayList<rutas> rutasL= new ArrayList<rutas>();
+     ArrayList<Rutas> rutasL= new ArrayList<Rutas>();
      
     int num=0;
         //Extraemos los profesionales de la base de datos 
@@ -45,7 +50,7 @@ public class rutas {
               while (itA.hasNext()) {
                      String valor = (String) itA.next();
                      String[] formateado = valor.split("/");
-                     rutas emple = new rutas(num,formateado[0],formateado[1],formateado[2],formateado[3],formateado[5],formateado[4]);
+                     Rutas emple = new Rutas(num,formateado[0],formateado[1],formateado[2],formateado[3],formateado[5],formateado[4]);
                      num++;
                      rutasL.add(emple);
               }

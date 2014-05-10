@@ -1,3 +1,8 @@
+package Controladores;
+
+/*
+* Clase controladora que conectara la interfaz con la BBDD
+*/
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class controlador extends HttpServlet {
+public class Controlador extends HttpServlet {
 
     private Conexion bd;
     private API api;
@@ -25,13 +30,14 @@ public class controlador extends HttpServlet {
         bd.abrirConexion();
     }
     
-    
+    //Metodo ejecutado siempre que se realiza una llamada para saber si nos encontramos en Todos o Profesionales
      @Override
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-       /*Nos mostrara Todos los clientes y profesionales*/
+       /*Opcion de Todos*/
          if (req.getParameter("tipo").toString().equals("Todos")) {
             Todos(req, res);
         }
+        /*Opcion de Profesionales*/
         if (req.getParameter("tipo").toString().equals("Profesional")) {
             Profesional(req, res);
         }
@@ -62,7 +68,7 @@ public class controlador extends HttpServlet {
     }
     
     
-    
+    //Profesionales
     public void Profesional(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
          HttpSession s = req.getSession(true);

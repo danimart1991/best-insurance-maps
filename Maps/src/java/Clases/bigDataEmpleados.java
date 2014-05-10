@@ -1,18 +1,22 @@
+package Clases;
 
+import Controladores.Conexion;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
+/*
+ * Clase Profesionales para la utilizacion de la generacion del JSON para BIG DATA
+*/
 
 public class bigDataEmpleados {
    
     String id_empleado;
-    String profesion;
     String GPS;
     String estado;
-    String radio_zona;
+    String profesion;
     String punto_zona;
+    String radio_zona;
     
     public bigDataEmpleados(){
          super();
