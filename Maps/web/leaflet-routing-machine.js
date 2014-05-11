@@ -235,7 +235,7 @@
 
 		_findClosestRoutePoint: function(latlng) {
 			var minDist = Number.MAX_VALUE,
-				minIndex,
+                            minIndex,
 			    i,
 			    d;
 
@@ -266,7 +266,7 @@
 				afterIndex: afterIndex,
 				latlng: e.latlng
 			});
-		},
+		}
 	});
 
 	L.Routing.line = function(route, options) {
@@ -322,7 +322,7 @@
                                         '<form><input type="submit" value="Submit"></form>';
 				L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
 
-                                if (this.options.showroute === true) {
+                                if (this.options.showroute) {
                                     altDiv.appendChild(this._createItineraryTable(alt));
                                 }
                                     this._altElements.push(altDiv);
@@ -881,7 +881,7 @@
 						options.icon = icon;
 					}
 
-					m = L.marker(this._waypoints[i].latLng, options);//.addTo(this._map);
+					m = L.marker(this._waypoints[i].latLng, options);//.addTo(this._map);                              
                                         this._hookWaypointEvents(m,i);
 				} else {
 					m = null;

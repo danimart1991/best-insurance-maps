@@ -133,36 +133,6 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                 <%
                                     };%>
                    </table>
-                   <table id="tablaCT">
-                       <tr> <td>ID</td><td>Atendido</td><td>Longitud</td><td>Latitud</td></tr>
-                                <%
-                                    ArrayList<String> datosCT1 = null;
-                                    datosCT1 = (ArrayList<String>) request.getAttribute("datosTodosIncidencias");
-
-                                    Iterator itCT1 = datosCT1.iterator();
-                                    while (itCT1.hasNext()) {
-                                        String valor = (String) itCT1.next();
-                                        String[] formateado = valor.split("/");
-                                %>
-                                <tr> <td><%=formateado[0]%></td><td><%=formateado[1]%></td><td><%=formateado[2]%></td><td><%=formateado[3]%></td></tr>
-                                <%
-                                    };%>
-                   </table>
-                   <table id="tablaCT">
-                       <tr> <td>ID</td><td>Atendido</td><td>Longitud</td><td>Latitud</td></tr>
-                                <%
-                                    ArrayList<String> datosCT2 = null;
-                                    datosCT2 = (ArrayList<String>) request.getAttribute("datosTodosIncidencias");
-
-                                    Iterator itCT2 = datosCT2.iterator();
-                                    while (itCT2.hasNext()) {
-                                        String valor = (String) itCT2.next();
-                                        String[] formateado = valor.split("/");
-                                %>
-                                <tr> <td><%=formateado[0]%></td><td><%=formateado[1]%></td><td><%=formateado[2]%></td><td><%=formateado[3]%></td></tr>
-                                <%
-                                    };%>
-                   </table>
                </div>
                             
                <div id="map" style="width: 900px; height: 550px"></div>
@@ -228,7 +198,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                <%
                                     ArrayList<String> datosB = null;
                                     datosB = (ArrayList<String>) request.getAttribute("datosTodosProfesionales");
-
+                                    
                                     Iterator itB = datosB.iterator();
                                     while (itB.hasNext()) {
                                         String valor = (String) itB.next();
@@ -255,26 +225,36 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                     while (itC.hasNext()) {
                                         String valor = (String) itC.next();
                                         String[] formateado = valor.split("/");
-                                                    %>
-                                                    L.marker([<%=formateado[2]%>, <%=formateado[3]%>]<% if(formateado[1].equals("t")){%>, {icon:greenCliente}<%}else{%>, {icon:redCliente}<%}%>
-                                                               ).addTo(map)
-                                        .bindPopup("<b>Cliente <%=formateado[0]%> </b><br />Estado <%=formateado[1]%>.").openPopup();
-                                                    <%
-                                                    if(formateado[4]!= null && formateado[4]!= ""){
-                                                        String posiciones = null;
-                                                        request.setAttribute("incidencia", formateado[0]);
-                                                        request.setAttribute("profesional", formateado[4]);
-                                                        posiciones=(String)request.getAttribute("posicionIncdProfesio");     
-                                                        String[] posic=posiciones.split("/");
-                                                    %>
-                                                        L.Routing.control({
-                                                             waypoints: [
-                                                             L.latLng(<%=posic[0]%>, <%=posic[1]%>),
-                                                             L.latLng(<%=posic[2]%>, <%=posic[3]%>)
-                                                              ]
-                                                        }).addTo(map);
-                                                     <%   
+                                            %>
+                                            L.marker([<%=formateado[2]%>, <%=formateado[3]%>]<% if(formateado[1].equals("t")){%>, {icon:greenCliente}<%}else{%>, {icon:redCliente}<%}%>
+                                                       ).addTo(map)
+                                            .bindPopup("<b>Cliente <%=formateado[0]%> </b><br />Estado <%=formateado[1]%>.").openPopup();
+                                            <%
+                                            // Si tiene un profesional asignado, dibujamos la ruta entre ambos.
+                                            if (!formateado[4].equals("null")) {
+                                                String posicProf0 = null;
+                                                String posicProf1 = null;
+
+                                                ArrayList<String> datosD = null;
+                                                datosD = (ArrayList<String>) request.getAttribute("datosTodosProfesionales");
+                                                Iterator itD = datosD.iterator();
+                                                while (itD.hasNext() && posicProf0 == null) {
+                                                    String datos = (String) itD.next();
+                                                    String[] formateado2 = datos.split("/");
+                                                    if (formateado2[0].equals(formateado[4])){
+                                                        posicProf0 = formateado2[2];
+                                                        posicProf1 = formateado2[3];
                                                     }
+                                                }
+                                            %>
+                                                L.Routing.control({
+                                                     waypoints: [
+                                                     L.latLng(<%=formateado[2]%>, <%=formateado[3]%>), // Posicion Incidencia
+                                                     L.latLng(<%=posicProf0%>, <%=posicProf1%>)        // Posicion Profesional
+                                                      ]
+                                                }).addTo(map);
+                                             <%   
+                                            }
                                     };%>
            
             var popup = L.popup();

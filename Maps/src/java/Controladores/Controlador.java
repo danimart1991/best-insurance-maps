@@ -57,16 +57,7 @@ public class Controlador extends HttpServlet {
         ArrayList<String> datosTodosIncidencias = null;
         datosTodosIncidencias = bd.datosTodosIncidencias();
         req.setAttribute("datosTodosIncidencias", datosTodosIncidencias);
-        
-         String idc = "";
-         idc=(String) req.getParameter("cliente");
-         String prof = "";
-         prof=(String) req.getParameter("profesional");
-         String posicionIncdProfesio = null;
-         posicionIncdProfesio= bd.posicionesIncdProfe(prof,idc);
-         req.setAttribute("posicionIncdProfesio", posicionIncdProfesio);
     }
-    
     
     //Profesionales
     public void Profesional(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
