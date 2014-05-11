@@ -56,7 +56,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             L.marker([40.41, -3.68]).addTo(map)
                     .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
 
-            L.circle([41.41, -2.11], 500, {
+            L.circle([41.41, -3.11], 500, {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5
@@ -72,14 +72,16 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                 waypoints: [
                     L.latLng(41.74, -4.94),
                     L.latLng(41.6792, -4.949)
-                ]
+                ],
+                showitinerary: true
             }).addTo(map);
             
             L.Routing.control({
                 waypoints: [
                     L.latLng(42.74, -4.94),
                     L.latLng(42.6792, -4.949)
-                ]
+                ],
+                showitinerary: true
             }).addTo(map);
 
             var popup = L.popup();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
@@ -100,8 +102,8 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             <%-- Si el atributo es Todos cargamos sus correspondientes valores --%>
             <% if (formularios.equals("Todos")) {%>
                 <input type="hidden" name="Todos" value="Todos">
-                <input type="hidden" value="Todos"  name="tipo">
-               <div class="tablasListados" >                        
+                <input type="hidden" value="Todos" name="tipo">
+              <div class="tablasListados" >                        
                    <table id="tablas">
                        <tr> <td>ID</td><td>Estado</td><td>Longitud</td><td>Latitud</td></tr>
                                 <%
@@ -210,7 +212,6 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                 %>
                                 <% if(formateado[4].equals("Grua")){%>
                                         gruas.addLayer(L.marker([<%=formateado[2]%>, <%=formateado[3]%>]
-                                        
                                             <%  if(Integer.parseInt(formateado[1])==0){%>, {icon:greenGrua}
                                             <%} else if(Integer.parseInt(formateado[1])>0 && Integer.parseInt(formateado[1])<3){%>, {icon:blueGrua}
                                             <%} else if(Integer.parseInt(formateado[1])>3){%>, {icon:redGrua}
@@ -262,17 +263,6 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                                     }
                                     };%>
            
-            var popup = L.popup();
-            
-            function onMapClick(e) {
-                popup
-                        .setLatLng(e.latlng)
-                        .setContent("You clicked the map at " + e.latlng.toString())
-                        .openOn(map);
-            }
-
-            map.on('click', onMapClick);
-            
             var baseMaps = {};
             
             var overlayMaps = {
