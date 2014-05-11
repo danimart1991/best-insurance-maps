@@ -4,6 +4,10 @@
     padding-top: 4px;
 }
 
+.hidding-div {
+    display: none;
+}
+
 .leaflet-routing-container h2 {
     font-size: 14px;
 }

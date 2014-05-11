@@ -292,9 +292,13 @@
 		},
 
 		onAdd: function() {
-			this._container = L.DomUtil.create('div', 'leaflet-routing-container leaflet-bar');
-			L.DomEvent.disableClickPropagation(this._container);
-			this._router.on('routefound', this._routeFound, this);
+                    if (this.options.showitinerary) {
+                        this._container = L.DomUtil.create('div', 'leaflet-routing-container leaflet-bar');
+                    } else {
+                        this._container = L.DomUtil.create('div', 'hidding-div');
+                    }
+                        L.DomEvent.disableClickPropagation(this._container);
+                        this._router.on('routefound', this._routeFound, this);
 			return this._container;
 		},
 
@@ -325,7 +329,8 @@
                                 if (this.options.showroute) {
                                     altDiv.appendChild(this._createItineraryTable(alt));
                                 }
-                                    this._altElements.push(altDiv);
+                                
+                                this._altElements.push(altDiv);
 			}
                         
 			this.fire('routeselected', {route: this._routes[0]});
@@ -985,10 +990,9 @@
                         
 			this._line = L.Routing.line(route);
 			this._line.addTo(this._map);
-			this._map.fitBounds(this._line.getBounds());
-			this._hookEvents(this._line);
+			//this._hookEvents(this._line);
 		},
-
+                
 		_route: function() {
 			this._clearLine();
 			this._clearAlts();

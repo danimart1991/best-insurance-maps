@@ -8,7 +8,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="generico.css" />
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
         <link rel="stylesheet" href="leaflet.css" />
         <link rel="stylesheet" href="leaflet-routing-machine.css" />
     </head>
@@ -43,7 +42,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                <div id="cabezaH2">
                   <div id="map" style="width: 900px; height: 550px"></div>
 
-        <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+        <script src="leaflet.js"></script>
         <script src="leaflet-routing-machine.js"></script>
         <script>
 
@@ -137,11 +136,12 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                             
                <div id="map" style="width: 900px; height: 550px"></div>
 
-        <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+        <script src="leaflet.js"></script>
         <script src="leaflet-routing-machine.js"></script>
         <script>
 
-            var map = L.map('map').setView([40.41, -3.68], 13);
+            var map = L.map('map').setView([40.41, -3.68], 6);
+            
             var greenCliente = L.icon({
                 iconUrl: 'Imagenes/green-pin.png',
                 iconSize:     [48, 48], // size of the icon
@@ -194,6 +194,10 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
             }).addTo(map);
+            
+            var gruas = L.layerGroup();
+            var hogar = L.layerGroup();
+            var incidencias = L.layerGroup();
 
                                <%
                                     ArrayList<String> datosB = null;
@@ -204,17 +208,19 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                         String valor = (String) itB.next();
                                         String[] formateado = valor.split("/");
                                 %>
-                                L.marker([<%=formateado[2]%>, <%=formateado[3]%>]
-                                        <% if(formateado[4].equals("Grua")){
-                                                if(Integer.parseInt(formateado[1])==0){%>, {icon:greenGrua}
+                                <% if(formateado[4].equals("Grua")){%>
+                                        gruas.addLayer(L.marker([<%=formateado[2]%>, <%=formateado[3]%>]
+                                        
+                                            <%  if(Integer.parseInt(formateado[1])==0){%>, {icon:greenGrua}
                                             <%} else if(Integer.parseInt(formateado[1])>0 && Integer.parseInt(formateado[1])<3){%>, {icon:blueGrua}
                                             <%} else if(Integer.parseInt(formateado[1])>3){%>, {icon:redGrua}
-                                        <%}} else {
-                                                if(Integer.parseInt(formateado[1])==0){%>, {icon:greenHogar}
+                                        <%}} else {%>
+                                        hogar.addLayer(L.marker([<%=formateado[2]%>, <%=formateado[3]%>]
+                                            <%  if(Integer.parseInt(formateado[1])==0){%>, {icon:greenHogar}
                                             <%} else if(Integer.parseInt(formateado[1])>0 && Integer.parseInt(formateado[1])<3){%>, {icon:blueHogar}
                                             <%} else if(Integer.parseInt(formateado[1])>3){%>, {icon:redHogar}
-                                        <%}}%>).addTo(map)
-                    .bindPopup("<b>Profesional <%=formateado[0]%></b><br />Estado <%=formateado[1]%>.").openPopup();
+                                        <%}}%>)
+                    .bindPopup("<b>Profesional <%=formateado[0]%></b><br />Estado <%=formateado[1]%>."));
                                 <%
                                     };
                                     
@@ -226,35 +232,34 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                         String valor = (String) itC.next();
                                         String[] formateado = valor.split("/");
                                             %>
-                                            L.marker([<%=formateado[2]%>, <%=formateado[3]%>]<% if(formateado[1].equals("t")){%>, {icon:greenCliente}<%}else{%>, {icon:redCliente}<%}%>
-                                                       ).addTo(map)
-                                            .bindPopup("<b>Cliente <%=formateado[0]%> </b><br />Estado <%=formateado[1]%>.").openPopup();
-                                            <%
-                                            // Si tiene un profesional asignado, dibujamos la ruta entre ambos.
-                                            if (!formateado[4].equals("null")) {
-                                                String posicProf0 = null;
-                                                String posicProf1 = null;
-
-                                                ArrayList<String> datosD = null;
-                                                datosD = (ArrayList<String>) request.getAttribute("datosTodosProfesionales");
-                                                Iterator itD = datosD.iterator();
-                                                while (itD.hasNext() && posicProf0 == null) {
-                                                    String datos = (String) itD.next();
-                                                    String[] formateado2 = datos.split("/");
-                                                    if (formateado2[0].equals(formateado[4])){
-                                                        posicProf0 = formateado2[2];
-                                                        posicProf1 = formateado2[3];
+                                            incidencias.addLayer(L.marker([<%=formateado[2]%>, <%=formateado[3]%>]<% if(formateado[1].equals("t")){%>, {icon:greenCliente}<%}else{%>, {icon:redCliente}<%}%>)
+                                            .bindPopup("<b>Cliente <%=formateado[0]%> </b><br />Estado <%=formateado[1]%>."));
+                                                    <%
+                                                    // Si tiene un profesional asignado, dibujamos la ruta entre ambos.
+                                                    if (!formateado[4].equals("null")) {
+                                                        String posicProf0 = null;
+                                                        String posicProf1 = null;
+                                                        
+                                                        ArrayList<String> datosD = null;
+                                                        datosD = (ArrayList<String>) request.getAttribute("datosTodosProfesionales");
+                                                        Iterator itD = datosD.iterator();
+                                                        while (itD.hasNext() && posicProf0 == null) {
+                                                            String datos = (String) itD.next();
+                                                            String[] formateado2 = datos.split("/");
+                                                            if (formateado2[0].equals(formateado[4])){
+                                                                posicProf0 = formateado2[2];
+                                                                posicProf1 = formateado2[3];
+                                                            }
+                                                        }
+                                                    %>
+                                                        L.Routing.control({
+                                                             waypoints: [
+                                                             L.latLng(<%=formateado[2]%>, <%=formateado[3]%>), // Posicion Incidencia
+                                                             L.latLng(<%=posicProf0%>, <%=posicProf1%>)        // Posicion Profesional
+                                                              ]
+                                                        }).addTo(map);
+                                                     <%   
                                                     }
-                                                }
-                                            %>
-                                                L.Routing.control({
-                                                     waypoints: [
-                                                     L.latLng(<%=formateado[2]%>, <%=formateado[3]%>), // Posicion Incidencia
-                                                     L.latLng(<%=posicProf0%>, <%=posicProf1%>)        // Posicion Profesional
-                                                      ]
-                                                }).addTo(map);
-                                             <%   
-                                            }
                                     };%>
            
             var popup = L.popup();
@@ -267,7 +272,21 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
             }
 
             map.on('click', onMapClick);
-
+            
+            var baseMaps = {};
+            
+            var overlayMaps = {
+                "Gruas": gruas,
+                "Hogar": hogar,
+                "Incidencias": incidencias
+            };
+            
+            L.control.layers(baseMaps, overlayMaps).addTo(map);
+            
+            map.addLayer(gruas);
+            map.addLayer(hogar);
+            map.addLayer(incidencias);
+            map.setView([40.41, -3.68], 6);
         </script>
                
           <% }%>
@@ -300,7 +319,7 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                             
                <div id="map" style="width: 900px; height: 550px"></div>
 
-        <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+        <script src="leaflet.js"></script>
         <script src="leaflet-routing-machine.js"></script>
         <script>
 
@@ -425,7 +444,8 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                                  waypoints: [
                                                  L.latLng(<%=formateado[2]%>, <%=formateado[3]%>),
                                                  L.latLng(<%=formateados[0]%>, <%=formateados[1]%>)
-                                                 ]
+                                                 ],
+                                                 showitinerary: true
                                         }).addTo(map);
                                                      <%
                                     };}
@@ -456,7 +476,8 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                                  waypoints: [
                                                  L.latLng(<%=formateado[2]%>, <%=formateado[3]%>),
                                                  L.latLng(<%=formateados[0]%>, <%=formateados[1]%>)
-                                                 ]
+                                                 ],
+                                                 showitinerary: true
                                         }).addTo(map);
                     <%
                                     };}}%>
