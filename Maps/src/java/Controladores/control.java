@@ -35,6 +35,7 @@ public class control extends HttpServlet {
          String lon2= (String) req.getParameter("lon");
          String cliente = (String) req.getParameter("id_incidencia");
          String tipo= (String)req.getParameter("TipoProfesional");
+         String direccion=(String)req.getParameter("direccion");
          
          req.setAttribute("id_incidencia", cliente);
          req.setAttribute("profesion", profesion);
@@ -91,7 +92,7 @@ public class control extends HttpServlet {
                  
            }
        }
-        req.getRequestDispatcher("/Profesionales.jsp?").forward(req, res);
+        req.getRequestDispatcher("/Profesionales.jsp?id_incidencia="+cliente+"&direccion="+direccion+"&profesion="+profesion+"").forward(req, res);
     }
 
     /*Cierre de la conexion con la bbdd*/
