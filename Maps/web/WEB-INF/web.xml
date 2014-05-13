@@ -8,6 +8,10 @@
         <servlet-name>Todos</servlet-name>
         <servlet-class>Controladores.Todos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>control</servlet-name>
+        <servlet-class>Controladores.control</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlador</servlet-name>
         <url-pattern>/controlador</url-pattern>
@@ -15,5 +19,9 @@
     <servlet-mapping>
         <servlet-name>Todos</servlet-name>
         <url-pattern>/Todos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>control</servlet-name>
+        <url-pattern>/control</url-pattern>
     </servlet-mapping>
 </web-app>

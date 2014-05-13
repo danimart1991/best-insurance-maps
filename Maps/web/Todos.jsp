@@ -126,7 +126,7 @@
                                                         String posicProf1 = null;
                                                         
                                                         ArrayList<String> datosD = null;
-                                                        datosD = (ArrayList<String>) request.getAttribute("datosTodosProfesionales");
+                                                        datosD = (ArrayList<String>) bd.datosTodosProfesionales();
                                                         Iterator itD = datosD.iterator();
                                                         while (itD.hasNext() && posicProf0 == null) {
                                                             String datos = (String) itD.next();
@@ -162,7 +162,6 @@
             map.addLayer(incidencias);
             map.setView([40.41, -3.68], 6);
         </script>
-               
-          <% }%>
+
     </body>
 </html>
