@@ -141,7 +141,9 @@
                                                              waypoints: [
                                                              L.latLng(<%=formateado[2]%>, <%=formateado[3]%>), // Posicion Incidencia
                                                              L.latLng(<%=posicProf0%>, <%=posicProf1%>)        // Posicion Profesional
-                                                              ]
+                                                              ],
+                                                            id_profesional: "null",
+                                                            estado_profesional: "null"
                                                         }).addTo(map);
                                                      <%   
                                                     }

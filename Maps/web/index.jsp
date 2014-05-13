@@ -73,7 +73,9 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                     L.latLng(41.74, -4.94),
                     L.latLng(41.6792, -4.949)
                 ],
-                showitinerary: true
+                showitinerary: true,
+                id_profesional: "null",
+                estado_profesional: "null"
             }).addTo(map);
             
             L.Routing.control({
@@ -81,7 +83,9 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                     L.latLng(42.74, -4.94),
                     L.latLng(42.6792, -4.949)
                 ],
-                showitinerary: true
+                showitinerary: true,
+                id_profesional: "null",
+                estado_profesional: "null"
             }).addTo(map);
 
             var popup = L.popup();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
@@ -257,7 +261,9 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                                              waypoints: [
                                                              L.latLng(<%=formateado[2]%>, <%=formateado[3]%>), // Posicion Incidencia
                                                              L.latLng(<%=posicProf0%>, <%=posicProf1%>)        // Posicion Profesional
-                                                              ]
+                                                              ],
+                                                              id_profesional: "null",
+                                                              estado_profesional: "null"
                                                         }).addTo(map);
                                                      <%   
                                                     }
@@ -435,7 +441,9 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                                  L.latLng(<%=formateado[2]%>, <%=formateado[3]%>),
                                                  L.latLng(<%=formateados[0]%>, <%=formateados[1]%>)
                                                  ],
-                                                 showitinerary: true
+                                                 showitinerary: true,
+                                                 id_profesional: "<%=formateado[0]%>",
+                                                 estado_profesional: "<%=formateado[1]%>"
                                         }).addTo(map);
                                                      <%
                                     };}
@@ -467,7 +475,9 @@ servlets no coincide con ninguno solo cargaos esta parte de código para informa
                                                  L.latLng(<%=formateado[2]%>, <%=formateado[3]%>),
                                                  L.latLng(<%=formateados[0]%>, <%=formateados[1]%>)
                                                  ],
-                                                 showitinerary: true
+                                                 showitinerary: true,
+                                                 id_profesional: "<%=formateado[0]%>",
+                                                 estado_profesional: "<%=formateado[1]%>"
                                         }).addTo(map);
                     <%
                                     };}}%>

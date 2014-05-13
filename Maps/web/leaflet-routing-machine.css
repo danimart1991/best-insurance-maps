@@ -19,7 +19,7 @@
 .leaflet-routing-alt, .leaflet-routing-geocoders {
     padding-left: 6px;
     border-bottom: 1px solid #ccc;
-    max-height: 320px;
+    height: 35px;
     overflow-y: auto;
     transition: all 0.2s ease;
 }
@@ -29,7 +29,6 @@
 }
 
 .leaflet-routing-alt-minimized {
-    color: #888;
     max-height: 35px;
     overflow: hidden;
     cursor: pointer;

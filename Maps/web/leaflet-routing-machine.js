@@ -317,11 +317,15 @@
 
                         // Draw the first route with more info:
                         altDiv = L.DomUtil.create('div', 'leaflet-routing-alt',	this._container);
-                        altDiv.innerHTML = '<h4>' + e.routes[0].name.join(', ') + '</h4>' +
-                                '<form><p>' + this._formatDistance(e.routes[0].summary.total_distance) +
-                                ', ' + this._formatTime(e.routes[0].summary.total_time) + 
+                        altDiv.innerHTML = '<form><div style="top: 9px; left: 6px; position: absolute;">' + 
+                                '<span style="font-weight:bold;">DNI: </span> ' + this.options.id_profesional.toString() +
+                                '<span style="font-weight:bold;"> Tareas: </span> ' + this.options.estado_profesional.toString() + 
+                                //e.routes[0].name.join(', ') +
+                                '</div><div style="right: 45px; top: 9px; position: absolute;">' +
+                                this._formatDistance(e.routes[0].summary.total_distance) +
+                                ', ' + this._formatTime(e.routes[0].summary.total_time) + '</div>' + 
                                 '<input type="submit" value=">" style="right:6px; top:5px; position:absolute;">' + 
-                                '</p></form>';
+                                '</form>';
                         L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
 
                         if (this.options.showroute) {
@@ -331,7 +335,7 @@
                         this._altElements.push(altDiv);
                         
                         // Draw the rest of the routes if exist
-			for (i = 1; i < e.routes.length; i++) {
+			/*for (i = 1; i < e.routes.length; i++) {
 				alt = e.routes[i];
 				altDiv = L.DomUtil.create('div', 'leaflet-routing-alt' +
 					' leaflet-routing-alt-minimized',
@@ -345,9 +349,9 @@
                                 }
                                 
                                 this._altElements.push(altDiv);
-			}
+			}*/
                         
-			this.fire('routeselected', {route: this._routes[0]});
+			this.fire('routedraw', {route: this._routes[0]});
 		},
 
 		_clearAlts: function() {
@@ -959,6 +963,7 @@
 			L.Routing.Itinerary.prototype.initialize.call(this, this._router, options);
                         
 			this.on('routeselected', this._routeSelected, this);
+                        this.on('routedraw', this._routeDraw, this);
 			this._plan.on('waypointschanged', this._route, this);
 
 			this._route();
@@ -1004,6 +1009,17 @@
                         
 			this._line = L.Routing.line(route);
 			this._line.addTo(this._map);
+                        this._map.fitBounds(this._line.getBounds());
+			//this._hookEvents(this._line);
+		},
+                
+                _routeDraw: function(e) {
+			var route = e.route;
+			this._clearLine();
+                        
+			this._line = L.Routing.line(route);
+			this._line.addTo(this._map);
+                        //this._map.fitBounds(this._line.getBounds());
 			//this._hookEvents(this._line);
 		},
                 
