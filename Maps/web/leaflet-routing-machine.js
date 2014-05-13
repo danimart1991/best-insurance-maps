@@ -315,15 +315,30 @@
 
 			this._routes = e.routes;
 
-			for (i = 0; i < e.routes.length; i++) {
+                        // Draw the first route with more info:
+                        altDiv = L.DomUtil.create('div', 'leaflet-routing-alt',	this._container);
+                        altDiv.innerHTML = '<h4>' + e.routes[0].name.join(', ') + '</h4>' +
+                                '<form><p>' + this._formatDistance(e.routes[0].summary.total_distance) +
+                                ', ' + this._formatTime(e.routes[0].summary.total_time) + 
+                                '<input type="submit" value=">" style="right:10px; top:10px; position:absolute;">' + 
+                                '</p></form>';
+                        L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
+
+                        if (this.options.showroute) {
+                            altDiv.appendChild(this._createItineraryTable(e.routes[0]));
+                        }
+
+                        this._altElements.push(altDiv);
+                        
+                        // Draw the rest of the routes if exist
+			for (i = 1; i < e.routes.length; i++) {
 				alt = e.routes[i];
 				altDiv = L.DomUtil.create('div', 'leaflet-routing-alt' +
-					(i > 0 ? ' leaflet-routing-alt-minimized' : ''),
+					' leaflet-routing-alt-minimized',
 					this._container);
-				altDiv.innerHTML = '<h2>' + alt.name.join(', ') + '</h2>' +
-					'<h3>' + this._formatDistance(alt.summary.total_distance) +
-					', ' + this._formatTime(alt.summary.total_time) + '</h3>' + 
-                                        '<form><input type="submit" value="Submit"></form>';
+				altDiv.innerHTML = '<h4>' + alt.name.join(', ') + '</h4>' +
+					'<p>' + this._formatDistance(alt.summary.total_distance) +
+					', ' + this._formatTime(alt.summary.total_time) + '</p>';
 				L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
 
                                 if (this.options.showroute) {
