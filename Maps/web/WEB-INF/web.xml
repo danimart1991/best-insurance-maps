@@ -4,8 +4,16 @@
         <servlet-name>controlador</servlet-name>
         <servlet-class>Controladores.Controlador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Todos</servlet-name>
+        <servlet-class>Controladores.Todos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controlador</servlet-name>
         <url-pattern>/controlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Todos</servlet-name>
+        <url-pattern>/Todos</url-pattern>
     </servlet-mapping>
 </web-app>
