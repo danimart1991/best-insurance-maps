@@ -320,7 +320,7 @@
                         altDiv.innerHTML = '<h4>' + e.routes[0].name.join(', ') + '</h4>' +
                                 '<form><p>' + this._formatDistance(e.routes[0].summary.total_distance) +
                                 ', ' + this._formatTime(e.routes[0].summary.total_time) + 
-                                '<input type="submit" value=">" style="right:10px; top:10px; position:absolute;">' + 
+                                '<input type="submit" value=">" style="right:6px; top:5px; position:absolute;">' + 
                                 '</p></form>';
                         L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
 
@@ -336,8 +336,7 @@
 				altDiv = L.DomUtil.create('div', 'leaflet-routing-alt' +
 					' leaflet-routing-alt-minimized',
 					this._container);
-				altDiv.innerHTML = '<h4>' + alt.name.join(', ') + '</h4>' +
-					'<p>' + this._formatDistance(alt.summary.total_distance) +
+				altDiv.innerHTML = '<p>' + this._formatDistance(alt.summary.total_distance) +
 					', ' + this._formatTime(alt.summary.total_time) + '</p>';
 				L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
 

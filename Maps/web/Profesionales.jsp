@@ -94,7 +94,7 @@
                          request.setAttribute("direccion", request.getParameter("direccion"));  
                         %>; 
                          var geocoder = new google.maps.Geocoder();
-                         var address = <%request.getParameter("direccion");%>;
+                         var address = "Calle alcala 6, Madrid";<%//request.getParameter("direccion").toString();%>;
                          geocoder.geocode( { 'address': address}, function(results, status) {
                          var latitude;
                          var  longitude;
@@ -105,7 +105,7 @@
                           }
                             request.setAttribute("lat", latitude);
                             request.setAttribute("lon", longitude);
-                       }   
+                       })   
                  
                  ///Falta quitar el profesional en el codigo de abajo
            <%      
@@ -185,16 +185,16 @@
 
 
 
-            var popup = L.popup();
+            //var popup = L.popup();
 
-            function onMapClick(e) {
-                popup
-                        .setLatLng(e.latlng)
-                        .setContent("You clicked the map at " + e.latlng.toString())
-                        .openOn(map);
-            }
+            //function onMapClick(e) {
+            //    popup
+            //            .setLatLng(e.latlng)
+            //            .setContent("You clicked the map at " + e.latlng.toString())
+            //            .openOn(map);
+            //}
 
-            map.on('click', onMapClick);
+            //map.on('click', onMapClick);
          
             
             
