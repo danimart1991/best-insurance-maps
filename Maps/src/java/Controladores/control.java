@@ -36,17 +36,12 @@ public class control extends HttpServlet {
          String cliente = (String) req.getParameter("id_incidencia");
          String tipo= (String)req.getParameter("TipoProfesional");
          String direccion=(String)req.getParameter("direccion");
-         
-         req.setAttribute("id_incidencia", cliente);
-         req.setAttribute("profesion", profesion);
-         req.setAttribute("TipoProfesional",tipo);
-         req.setAttribute("NumeroProfesional", numero);
         
          if(!bd.existeIncidencia(cliente)){
             bd.insertarIncidencia(cliente, lat2, lon2);
          }
       //Si ha introducido un cliente  
-       if(cliente!= null && !cliente.equals("") && !req.getParameter("TipoProfesional").toString().equals("Ninguno")){  
+       if(cliente!= null && !cliente.equals("") && !tipo.equals("Ninguno")){  
             /*Latitud y Longitud de la incidencia*/
            String client = bd.datosIncidencia(cliente);
            //Si el cliente existe en la base de datos con un numero de lon y lat

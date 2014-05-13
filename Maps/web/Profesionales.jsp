@@ -91,6 +91,7 @@
             if (request.getParameter("id_incidencia") != null && request.getParameter("direccion") != null && request.getParameter("profesion") != null) {
                          request.setAttribute("id_incidencia", request.getParameter("id_incidencia"));
                          request.setAttribute("profesion", request.getParameter("profesion"));    
+                         request.setAttribute("direccion", request.getParameter("direccion"));  
                         %>; 
                          var geocoder = new google.maps.Geocoder();
                          var address = <%request.getParameter("direccion");%>;
