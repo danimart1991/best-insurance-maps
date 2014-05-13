@@ -16,7 +16,6 @@
     
             <form id="formulario" action="control">
                 
-             <input type="hidden" name="Profesional" value="Profesional">
             <%--opciones de la seleccion de profesionales a mostrar--%>
                
                 <select id="TipoProfesional" name="TipoProfesional" onchange="javascript:submit();">
@@ -109,7 +108,7 @@
                  
                  ///Falta quitar el profesional en el codigo de abajo
            <%      
-                       
+                   if(request.getParameter("TipoProfesional")!=null){
                        String vals = null;
                        vals=  (String) request.getAttribute("datosIncidencia");
                        String[] formateados = vals.split("/");
@@ -181,7 +180,7 @@
                                                  showitinerary: true
                                         }).addTo(map);
                     <%
-                                    };}}%>
+                                    };}}}%>
 
 
 

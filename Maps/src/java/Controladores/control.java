@@ -91,7 +91,7 @@ public class control extends HttpServlet {
                  
            }
        }
-        req.getRequestDispatcher("/Profesionales.jsp").forward(req, res);
+        req.getRequestDispatcher("/Profesionales.jsp?").forward(req, res);
     }
 
     /*Cierre de la conexion con la bbdd*/
