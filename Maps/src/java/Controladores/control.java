@@ -31,14 +31,20 @@ public class control extends HttpServlet {
        HttpSession s = req.getSession(true);
          String profesion = (String) req.getParameter("profesion");
          String numero= (String)req.getParameter("NumeroProfesional");
-         String lat2= (String) req.getParameter("lat");
-         String lon2= (String) req.getParameter("lon");
+         //String lat2= (String) req.getParameter("lat");
+         //String lon2= (String) req.getParameter("lon");
          String cliente = (String) req.getParameter("id_incidencia");
          String tipo= (String)req.getParameter("TipoProfesional");
          String direccion=(String)req.getParameter("direccion");
         
+          String posiciones=api.excutePostPosiciones(direccion);
+                    String[] respuesta1 = posiciones.split("\"lat\" :");
+                    String[] latitu=respuesta1[0].split(",");
+                    String[] respuesta2 = posiciones.split("\"lng\" :");
+                    String[] longitu=respuesta2[0].split("}");
+         
          if(!bd.existeIncidencia(cliente)){
-            bd.insertarIncidencia(cliente, lat2, lon2);
+            bd.insertarIncidencia(cliente, latitu[0], longitu[0]);
          }
       //Si ha introducido un cliente  
        if(cliente!= null && !cliente.equals("") && !tipo.equals("Ninguno")){  

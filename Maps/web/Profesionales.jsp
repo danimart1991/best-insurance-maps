@@ -93,19 +93,19 @@
                          request.setAttribute("profesion", request.getParameter("profesion"));    
                          request.setAttribute("direccion", request.getParameter("direccion"));  
                         %>; 
-                         var geocoder = new google.maps.Geocoder();
-                         var address = "Calle alcala 6, Madrid";<%//request.getParameter("direccion").toString();%>;
-                         geocoder.geocode( { 'address': address}, function(results, status) {
-                         var latitude;
-                         var  longitude;
-                         if (status === google.maps.GeocoderStatus.OK) {
+                       //  var geocoder = new google.maps.Geocoder();
+                       //  var address = "Calle alcala 6, Madrid";<%//request.getParameter("direccion").toString();%>;
+                       //  geocoder.geocode( { 'address': address}, function(results, status) {
+                      //   var latitude;
+                      //   var  longitude;
+                      //   if (status === google.maps.GeocoderStatus.OK) {
 
-                            latitude = results[0].geometry.location.lat();
-                            longitude = results[0].geometry.location.lng();
-                          }
-                            request.setAttribute("lat", latitude);
-                            request.setAttribute("lon", longitude);
-                       })   
+                       //     latitude = results[0].geometry.location.lat();
+                       //     longitude = results[0].geometry.location.lng();
+                       //   }
+                        //    request.setAttribute("lat", latitude);
+                        //    request.setAttribute("lon", longitude);
+                      // })   
                  
                  ///Falta quitar el profesional en el codigo de abajo
            <%      
