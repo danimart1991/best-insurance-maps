@@ -94,9 +94,9 @@
                          request.setAttribute("direccion", request.getParameter("direccion"));
                          
                         %>;
-                        <input type="hidden" name="direccion" value=<%=request.getParameter("direccion")%>>  
-                        <input type="hidden" name="id_incidencia" value=<%=request.getParameter("id_incidencia")%>> 
-                        <input type="hidden" name="profesion" value=<%=request.getParameter("profesion")%>> 
+                        <input type="hidden" name="direccion" value="<%=request.getParameter("direccion")%>">  
+                        <input type="hidden" name="id_incidencia" value="<%=request.getParameter("id_incidencia")%>"> 
+                        <input type="hidden" name="profesion" value="<%=request.getParameter("profesion")%>"> 
                        //  var geocoder = new google.maps.Geocoder();
                        //  var address = "Calle alcala 6, Madrid";<%//request.getParameter("direccion").toString();%>;
                        //  geocoder.geocode( { 'address': address}, function(results, status) {

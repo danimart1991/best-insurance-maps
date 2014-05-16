@@ -31,13 +31,12 @@ public class control extends HttpServlet {
        HttpSession s = req.getSession(true);
          String profesion = (String) req.getParameter("profesion");
          String numero= (String)req.getParameter("NumeroProfesional");
-         //String lat2= (String) req.getParameter("lat");
-         //String lon2= (String) req.getParameter("lon");
          String cliente = (String) req.getParameter("id_incidencia");
          String tipo= (String)req.getParameter("TipoProfesional");
          String direccion=(String)req.getParameter("direccion");
         
-          String posiciones=api.excutePostPosiciones(direccion);
+         
+         String posiciones=api.excutePostPosiciones(direccion);
                     String[] respuesta1 = posiciones.split("\"lat\" :");
                     String[] latitu=respuesta1[0].split(",");
                     String[] respuesta2 = posiciones.split("\"lng\" :");
@@ -92,8 +91,14 @@ public class control extends HttpServlet {
                 req.setAttribute("datosProfesionalesCorto", datosProfesionalesCorto);
                  
            }
+           
+           req.setAttribute("profesion", profesion);
+           req.setAttribute("NumeroProfesional", numero);
+           req.setAttribute("id_incidencia", cliente);
+           req.setAttribute("TipoProfesional", tipo);
+           req.setAttribute("direccion", direccion);
        }
-        req.getRequestDispatcher("/Profesionales.jsp?id_incidencia="+cliente+"&direccion="+direccion+"&profesion="+profesion+"").forward(req, res);
+        req.getRequestDispatcher("/Profesionales.jsp").forward(req, res);
     }
 
     /*Cierre de la conexion con la bbdd*/
