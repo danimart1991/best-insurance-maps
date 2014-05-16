@@ -149,6 +149,28 @@
                                                     }
                                     };%>
            
+           // TODO: Terminar leyenda con iconos y colores. ;)
+           var legend = L.control({position: 'bottomleft'});
+           
+           legend.onAdd = function (map) {
+               
+               var div = L.DomUtil.create('div', 'info legend');
+               
+               div.innerHTML +=
+                       '<i>Clientes: </i>' + '<br>' +
+                       '<i style="background: green"></i>' + 'Atendido<br>' +
+                       '<i style="background: red"></i>' + 'Pendiente<br>' +
+                       '<i>Profesionales: </i>' + '<br>' +
+                       '<i style="background: green"></i>' + '0 Tareas<br>' +
+                       '<i style="background: blue"></i>' + '1-3 Tareas<br>' +
+                       '<i style="background: red"></i>' + '+3 Tareas<br>';
+               
+           
+               return div;
+           };
+           
+           legend.addTo(map);
+           
             var baseMaps = {};
             
             var overlayMaps = {
@@ -162,6 +184,7 @@
             map.addLayer(gruas);
             map.addLayer(hogar);
             map.addLayer(incidencias);
+            
             map.setView([40.41, -3.68], 6);
         </script>
 
