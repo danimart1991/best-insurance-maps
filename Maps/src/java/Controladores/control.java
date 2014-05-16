@@ -37,10 +37,10 @@ public class control extends HttpServlet {
         
          
          String posiciones=api.excutePostPosiciones(direccion);
-                    String[] respuesta1 = posiciones.split("\"lat\" :");
-                    String[] latitu=respuesta1[0].split(",");
-                    String[] respuesta2 = posiciones.split("\"lng\" :");
-                    String[] longitu=respuesta2[0].split("}");
+                    String[] respuesta1 = posiciones.split(":");
+                    String[] latitu=respuesta1[26].split(",");
+                    String[] respuesta2 = posiciones.split(":");
+                    String[] longitu=respuesta2[27].split("}");
          
          if(!bd.existeIncidencia(cliente)){
             bd.insertarIncidencia(cliente, latitu[0], longitu[0]);
