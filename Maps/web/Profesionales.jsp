@@ -32,6 +32,9 @@
                <div id="map" style="width: 900px; height: 550px"></div>
                 <script src="leaflet.js"></script>
                 <script src="leaflet-routing-machine.js"></script>
+                <input type="hidden" name="direccion" value="<%=request.getParameter("direccion")%>">  
+                <input type="hidden" name="id_incidencia" value="<%=request.getParameter("id_incidencia")%>"> 
+                <input type="hidden" name="profesion" value="<%=request.getParameter("profesion")%>"> 
                 <script>
 
             var map = L.map('map').setView([40.41, -3.68], 13);
@@ -93,10 +96,8 @@
                          request.setAttribute("profesion", request.getParameter("profesion"));    
                          request.setAttribute("direccion", request.getParameter("direccion"));
                          
-                        %>;
-                        <input type="hidden" name="direccion" value="<%=request.getParameter("direccion")%>">  
-                        <input type="hidden" name="id_incidencia" value="<%=request.getParameter("id_incidencia")%>"> 
-                        <input type="hidden" name="profesion" value="<%=request.getParameter("profesion")%>"> 
+                        %>
+                        
                        //  var geocoder = new google.maps.Geocoder();
                        //  var address = "Calle alcala 6, Madrid";<%//request.getParameter("direccion").toString();%>;
                        //  geocoder.geocode( { 'address': address}, function(results, status) {
@@ -150,7 +151,9 @@
                                                  L.latLng(<%=formateado[2]%>, <%=formateado[3]%>),
                                                  L.latLng(<%=formateados[0]%>, <%=formateados[1]%>)
                                                  ],
-                                                 showitinerary: true
+                                                 showitinerary: true,
+                                                 id_profesional: "<%=formateado[0]%>",
+                                                 estado_profesional: "<%=formateado[1]%>"
                                         }).addTo(map);
                                                      <%
                                     };}
@@ -182,7 +185,9 @@
                                                  L.latLng(<%=formateado[2]%>, <%=formateado[3]%>),
                                                  L.latLng(<%=formateados[0]%>, <%=formateados[1]%>)
                                                  ],
-                                                 showitinerary: true
+                                                 showitinerary: true,
+                                                 id_profesional: "<%=formateado[0]%>",
+                                                 estado_profesional: "<%=formateado[1]%>"
                                         }).addTo(map);
                     <%
                                     };}}}%>
