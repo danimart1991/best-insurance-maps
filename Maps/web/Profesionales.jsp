@@ -119,9 +119,13 @@
                        vals=  (String) request.getAttribute("datosIncidencia");
                        String[] formateados = vals.split("/");
             %>
-                                L.marker([<%=formateados[0]%>, <%=formateados[1]%>]<% if(formateados[3]=="t"){%>, {icon:greenCliente}<%}else{%>, {icon:redCliente}<%}%>
-                                           ).addTo(map)
-                    .bindPopup("<b>Cliente <%=formateados[2]%> </b><br />Estado <%=formateados[3]%>.").openPopup();
+                // Incidencia atendida, icono = verde, NO atendida, icono = rojo.
+                var iconoIncidencia;
+                if (<%=formateados[3].equals("t")%>) iconoIncidencia = greenCliente;
+                else iconoIncidencia = redCliente;
+                
+                L.marker([<%=formateados[0]%>, <%=formateados[1]%>], {icon: iconoIncidencia})
+                .bindPopup("<b>Cliente <%=formateados[2]%> </b><br />Estado <%=formateados[3]%>.");
             
                            <%
                            if (request.getParameter("TipoProfesional").toString().equals("Rapido")) {
