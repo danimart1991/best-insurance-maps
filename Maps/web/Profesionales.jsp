@@ -32,9 +32,9 @@
                <div id="map" style="width: 900px; height: 550px"></div>
                 <script src="leaflet.js"></script>
                 <script src="leaflet-routing-machine.js"></script>
-                <input type="hidden" name="direccion" value="<%=request.getParameter("direccion")%>">  
-                <input type="hidden" name="id_incidencia" value="<%=request.getParameter("id_incidencia")%>"> 
-                <input type="hidden" name="profesion" value="<%=request.getParameter("profesion")%>"> 
+                <input name="direccion" value="<%=request.getParameter("direccion")%>">  
+                <input name="id_incidencia" value="<%=request.getParameter("id_incidencia")%>"> 
+                <input  name="profesion" value="<%=request.getParameter("profesion")%>"> 
                 <script>
 
             var map = L.map('map').setView([40.41, -3.68], 13);
@@ -96,9 +96,10 @@
                        //  request.setAttribute("profesion", request.getParameter("profesion"));    
                        //  request.setAttribute("direccion", request.getParameter("direccion"));
                      
-                   if(!request.getParameter("TipoProfesional").toString().equals("Ninguno")){
+                   if(request.getAttribute("TipoProfesional") != null){
                        String vals = null;
                        vals=  (String) request.getAttribute("datosIncidencia");
+                       System.out.println(vals);
                        String[] formateados = vals.split("/");
             %>
                 // Incidencia atendida, icono = verde, NO atendida, icono = rojo.
@@ -106,8 +107,8 @@
                 if (<%=formateados[3].equals("t")%>) iconoIncidencia = greenCliente;
                 else iconoIncidencia = redCliente;
                 
-                L.marker([<%=formateados[0]%>, <%=formateados[1]%>], {icon: iconoIncidencia})
-                .bindPopup("<b>Cliente <%=formateados[2]%> </b><br />Estado <%=formateados[3]%>.");
+                L.marker([<%=formateados[0]%>, <%=formateados[1]%>], {icon: iconoIncidencia}).addTo(map)
+                .bindPopup("<b>Cliente <%=formateados[2]%> </b><br />Estado <%=formateados[3]%>.").openPopup();
             
                            <%
                            if (request.getParameter("TipoProfesional").toString().equals("Rapido")) {

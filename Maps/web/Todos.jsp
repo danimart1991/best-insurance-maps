@@ -14,8 +14,6 @@
     </head>
 
     <body>
-        <!--<input type="hidden" name="Todos" value="Todos">-->
-        <!--<input type="hidden" value="Todos" name="tipo">-->
         <div id="map"></div>
 
         <script src="leaflet.js"></script>

@@ -218,7 +218,7 @@ public void insertarDistanciasTiempos(String profesional,String incidencia,Strin
 public void insertarIncidencia(String incid,String lati,String longi) {
     try {
         set = conexion.createStatement();
-        set.executeUpdate("insert into incidencia (id_incidencia,atendido,posicionincidencia)values('"+incid+"','f',ST_GeographyFromText('POINT('||"+longi+"||' '||"+lati+"||')'))" );
+        set.executeUpdate("insert into incidencia (id_incidencia,atendido,posicionincidencia)values('"+incid+"','f',ST_GeographyFromText('POINT('||'"+longi+"'||' '||'"+lati+"'||')'))" );
         set.close();
     }catch(Exception e){
         System.out.println("ERROR: Fallo en la inserccion de la incidencia");
@@ -240,7 +240,7 @@ public void ModificasIncidencia(String incid,String prof) {
 public void insertarProfesional(String prof,String tipo,String lati,String longi,String radio,String num) {
     try {
         set = conexion.createStatement();
-        set.executeUpdate("insert into profesional (id_profesional,profesion,estado,radio_zona,zona,posicionprofesional)values('"+prof+"','"+tipo+"',"+num+","+radio+",ST_GeographyFromText('POINT('||"+longi+"||' '||"+lati+"||')'),ST_GeographyFromText('POINT(0 0)'))" );
+        set.executeUpdate("insert into profesional (id_profesional,profesion,estado,radio_zona,zona,posicionprofesional)values('"+prof+"','"+tipo+"',"+num+","+radio+",ST_GeographyFromText('POINT('||'"+longi+"'||' '||'"+lati+"'||')'),ST_GeographyFromText('POINT(0 0)'))" );
         set.close();
     }catch(Exception e){
         System.out.println("ERROR: Fallo en la inserccion del profesional");
@@ -251,7 +251,7 @@ public void insertarProfesional(String prof,String tipo,String lati,String longi
 public void ModificasProfesional(String prof,String lat,String lon,String num) {
       try{
         set = conexion.createStatement();
-        set.executeUpdate("UPDATE profesional SET estado="+num+",posicionprofesional=ST_GeographyFromText('POINT('||"+lon+"||' '||"+lat+"||')') WHERE id_profesional ='"+prof+"'");
+        set.executeUpdate("UPDATE profesional SET estado="+num+",posicionprofesional=ST_GeographyFromText('POINT('||'"+lon+"'||' '||'"+lat+"'||')') WHERE id_profesional ='"+prof+"'");
         set.close();
     }catch(Exception e){
         System.out.println("ERROR: Fallo en la modificacion del Profesional");

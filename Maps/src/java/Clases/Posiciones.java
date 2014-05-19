@@ -12,11 +12,16 @@ public class Posiciones {
     String longitud;
     String numero_trabajos;
 
-    public Posiciones(String id,String prof, String lat,String lon,String rad, String numer){
+    public Posiciones(String id, String lat,String lon, String numer){
         super();
+        id_empleado = id;
         Conexion db = new Conexion();
         db.abrirConexion();
         db.ModificasProfesional(id, lat, lon, numer);
         
+    }
+    
+    public String getCaca() {
+        return id_empleado;
     }
 }

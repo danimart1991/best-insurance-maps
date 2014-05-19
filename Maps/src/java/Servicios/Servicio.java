@@ -12,7 +12,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 
 
-@WebService(serviceName = "ServicioMapas")
+@WebService(serviceName = "ServicioMa")
 public class Servicio {
     Gson gson=new Gson();
     /**

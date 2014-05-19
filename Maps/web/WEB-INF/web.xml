@@ -16,6 +16,10 @@
         <servlet-class>Controladores.control</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ServicioMapas</servlet-name>
+        <servlet-class>ServicioMapas</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Servicio</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>control</servlet-name>
         <url-pattern>/control</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServicioMapas</servlet-name>
+        <url-pattern>/ServicioMapas</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Servicio</servlet-name>
