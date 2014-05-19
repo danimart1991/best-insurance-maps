@@ -14,7 +14,7 @@
 
     <body>
     
-            <form id="formulario" action="control">
+            <form id="formulario" method="Get" action="control">
                 
             <%--opciones de la seleccion de profesionales a mostrar--%>
                
@@ -92,29 +92,11 @@
             }).addTo(map);
        <%             
             if (request.getParameter("id_incidencia") != null && request.getParameter("direccion") != null && request.getParameter("profesion") != null) {
-                         request.setAttribute("id_incidencia", request.getParameter("id_incidencia"));
-                         request.setAttribute("profesion", request.getParameter("profesion"));    
-                         request.setAttribute("direccion", request.getParameter("direccion"));
-                         
-                        %>
-                        
-                       //  var geocoder = new google.maps.Geocoder();
-                       //  var address = "Calle alcala 6, Madrid";<%//request.getParameter("direccion").toString();%>;
-                       //  geocoder.geocode( { 'address': address}, function(results, status) {
-                      //   var latitude;
-                      //   var  longitude;
-                      //   if (status === google.maps.GeocoderStatus.OK) {
-
-                       //     latitude = results[0].geometry.location.lat();
-                       //     longitude = results[0].geometry.location.lng();
-                       //   }
-                        //    request.setAttribute("lat", latitude);
-                        //    request.setAttribute("lon", longitude);
-                      // })   
-                 
-                 ///Falta quitar el profesional en el codigo de abajo
-           <%      
-                   if(request.getParameter("TipoProfesional")!=null){
+                        // request.setAttribute("id_incidencia", request.getParameter("id_incidencia"));
+                       //  request.setAttribute("profesion", request.getParameter("profesion"));    
+                       //  request.setAttribute("direccion", request.getParameter("direccion"));
+                     
+                   if(!request.getParameter("TipoProfesional").toString().equals("Ninguno")){
                        String vals = null;
                        vals=  (String) request.getAttribute("datosIncidencia");
                        String[] formateados = vals.split("/");
