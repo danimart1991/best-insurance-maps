@@ -46,7 +46,7 @@ public class ServicioMapas extends HttpServlet {
             System.out.println(responses);
             java.lang.reflect.Type tipoObjeto = new TypeToken<Posiciones>(){}.getType();
       //Transformacion del JSON en un array de Posiciones
-      ArrayList<Posiciones> grua=gson.fromJson(responses.toString(), Posiciones.class());
+      ArrayList<Posiciones> grua=gson.fromJson(responses.toString(), tipoObjeto);
             System.out.println(((Posiciones)grua.get(0)).getCaca());
         } finally {
             out.close();
