@@ -99,7 +99,6 @@
                    if(request.getAttribute("TipoProfesional") != null){
                        String vals = null;
                        vals=  (String) request.getAttribute("datosIncidencia");
-                       System.out.println(vals);
                        String[] formateados = vals.split("/");
             %>
                 // Incidencia atendida, icono = verde, NO atendida, icono = rojo.

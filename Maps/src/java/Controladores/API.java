@@ -68,7 +68,8 @@ public class API {
     HttpURLConnection connection = null;  
     try {
       //Crear la conexion a la URL de la API
-      url = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\""+Origen+"\"&sensor=false");
+      String Origen2 = Origen.replace(" ", "%20");
+      url = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=\""+Origen2+"\"&sensor=false");
       connection = (HttpURLConnection)url.openConnection();
       connection.setRequestMethod("POST");
       connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
