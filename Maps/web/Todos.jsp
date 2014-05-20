@@ -103,13 +103,13 @@
                     else if (<%=Integer.parseInt(formateado[1])%> > 3) iconoProfesional = redGrua;
                     else iconoProfesional = blueGrua;
                     gruas.addLayer(L.marker([<%=formateado[2]%>, <%=formateado[3]%>], {icon: iconoProfesional})
-                    .bindPopup("<b>Profesional <%=formateado[0]%></b><br />Estado <%=formateado[1]%>."));
+                    .bindPopup("<b>Profesional: <%=formateado[0]%></b><br />Tareas: <%=formateado[1]%>."));
                 } else {
                     if (<%=Integer.parseInt(formateado[1])%> === 0) iconoProfesional = greenHogar;
                     else if (<%=Integer.parseInt(formateado[1])%> > 3) iconoProfesional = redHogar;
                     else iconoProfesional = blueHogar;
                     hogar.addLayer(L.marker([<%=formateado[2]%>, <%=formateado[3]%>], {icon: iconoProfesional})
-                    .bindPopup("<b>Profesional <%=formateado[0]%></b><br />Estado <%=formateado[1]%>."));
+                    .bindPopup("<b>Profesional: <%=formateado[0]%></b><br />Tareas: <%=formateado[1]%>."));
                 }
                    
             <%
@@ -125,14 +125,16 @@
                 String valor = (String) itC.next();
                 String[] formateado = valor.split("/");
             %>
-                // Incidencia atendida, icono = verde, NO atendida, icono = rojo.
+                // Incidencia atendida, icono = verde; NO atendida, icono = rojo.
                 var iconoIncidencia;
-                if (<%=formateado[1].equals("t")%>) iconoIncidencia = greenCliente;
-                else iconoIncidencia = redCliente;
-                
-                incidencias.addLayer(L.marker([<%=formateado[2]%>, <%=formateado[3]%>], {icon: iconoIncidencia})
-                .bindPopup("<b>Cliente <%=formateado[0]%> </b><br />Estado <%=formateado[1]%>."));
-
+                if (<%=formateado[1].equals("t")%>) {
+                    incidencias.addLayer(L.marker([<%=formateado[2]%>, <%=formateado[3]%>], {icon: greenCliente})
+                    .bindPopup("<b>Cliente: <%=formateado[0]%> </b><br />Estado: Atendido."));
+                }
+                else {
+                    incidencias.addLayer(L.marker([<%=formateado[2]%>, <%=formateado[3]%>], {icon: redCliente})
+                    .bindPopup("<b>Cliente: <%=formateado[0]%> </b><br />Estado: No Atendido."));
+                }
             <%
                 // Si tiene un profesional asignado, dibujamos la ruta entre ambos.
                 if (!formateado[4].equals("null")) {
@@ -158,6 +160,7 @@
                             L.latLng(<%=formateado[2]%>, <%=formateado[3]%>), // Posicion Incidencia
                             L.latLng(<%=posicProf0%>, <%=posicProf1%>)        // Posicion Profesional
                         ],
+                        id_incidencia: "null",
                         id_profesional: "null",
                         estado_profesional: "null"
                     }).addTo(map);

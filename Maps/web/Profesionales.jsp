@@ -138,6 +138,7 @@
                                                  L.latLng(<%=formateados[0]%>, <%=formateados[1]%>)
                                                  ],
                                                  showitinerary: true,
+                                                 id_incidencia: "<%=formateados[2]%>",
                                                  id_profesional: "<%=formateado[0]%>",
                                                  estado_profesional: "<%=formateado[1]%>"
                                         }).addTo(map);
@@ -172,6 +173,7 @@
                                                  L.latLng(<%=formateados[0]%>, <%=formateados[1]%>)
                                                  ],
                                                  showitinerary: true,
+                                                 id_incidencia: "<%=formateados[2]%>",
                                                  id_profesional: "<%=formateado[0]%>",
                                                  estado_profesional: "<%=formateado[1]%>"
                                         }).addTo(map);

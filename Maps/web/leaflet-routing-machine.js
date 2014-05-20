@@ -315,16 +315,19 @@
 
 			this._routes = e.routes;
 
+                        // TODO: Cambiar a ip gestion cuando la tengamos
                         // Draw the first route with more info:
                         altDiv = L.DomUtil.create('div', 'leaflet-routing-alt',	this._container);
                         altDiv.innerHTML = '<form><div style="top: 9px; left: 6px; position: absolute;">' + 
                                 '<span style="font-weight:bold;">DNI: </span> ' + this.options.id_profesional.toString() +
                                 '<span style="font-weight:bold;"> Tareas: </span> ' + this.options.estado_profesional.toString() + 
-                                //e.routes[0].name.join(', ') +
                                 '</div><div style="right: 45px; top: 9px; position: absolute;">' +
                                 this._formatDistance(e.routes[0].summary.total_distance) +
                                 ', ' + this._formatTime(e.routes[0].summary.total_time) + '</div>' + 
-                                '<input type="submit" value=">" style="right:6px; top:5px; position:absolute;">' + 
+                                '<input type="submit" value=">" style="right:6px; top:5px; position:absolute;"' +
+                                'onclick="window.location.href=\'http://ip:8080/SistemaGestion/rest/mapas/profesional?'+
+                                'id=' + this.options.id_incidencia.toString() +
+                                '&dniProfesional=' + this.options.id_profesional.toString() + '\'">' + 
                                 '</form>';
                         L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
 
