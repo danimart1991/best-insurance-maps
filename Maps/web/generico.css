@@ -19,6 +19,7 @@
     width: 100%; 
     height: 100%; 
     position: absolute; 
+    /* TODO: Esto hay que descomentarlo y mejorar el sistema en Profesionales.jsp para que no se oculte. */
     /*top:0px; 
     left:0px;*/
 }

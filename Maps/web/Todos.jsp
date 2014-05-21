@@ -23,49 +23,49 @@
             var map = L.map('map').setView([40.41, -3.68], 6);
 
             // Definimos los iconos de gruas, hogar y clientes.
-            var greenCliente = L.icon({// Cliente Atendido
+            var greenCliente = L.icon({             // Cliente Atendido
                 iconUrl: 'Imagenes/green-pin.png',
-                iconSize: [48, 48], // tamaño del icono.
-                iconAnchor: [24, 47], // punto del icono == punto localizacion
-                popupAnchor: [0, -45]   // punto donde se abrirá el popup
+                iconSize: [48, 48],                 // tamaño del icono.
+                iconAnchor: [24, 47],               // punto del icono == punto localizacion
+                popupAnchor: [0, -45]               // punto donde se abrirá el popup
             });
-            var redCliente = L.icon({// Cliente NO Atendido
+            var redCliente = L.icon({               // Cliente NO Atendido
                 iconUrl: 'Imagenes/red-pin.png',
                 iconSize: [48, 48],
                 iconAnchor: [24, 47],
                 popupAnchor: [0, -45]
             });
-            var greenGrua = L.icon({// Gruas con 0 Tareas
+            var greenGrua = L.icon({                // Gruas con 0 Tareas
                 iconUrl: 'Imagenes/green-grua.png',
                 iconSize: [48, 48],
                 iconAnchor: [24, 47],
                 popupAnchor: [0, -45]
             });
-            var blueGrua = L.icon({// Gruas con 1-3 Tareas
+            var blueGrua = L.icon({                 // Gruas con 1-3 Tareas
                 iconUrl: 'Imagenes/blue-grua.png',
                 iconSize: [48, 48],
                 iconAnchor: [24, 47],
                 popupAnchor: [0, -45]
             });
-            var redGrua = L.icon({// Gruas con +3 Tareas
+            var redGrua = L.icon({                  // Gruas con +3 Tareas
                 iconUrl: 'Imagenes/red-grua.png',
                 iconSize: [48, 48],
                 iconAnchor: [24, 47],
                 popupAnchor: [0, -45]
             });
-            var greenHogar = L.icon({// Hogar con 0 Tareas
+            var greenHogar = L.icon({               // Hogar con 0 Tareas
                 iconUrl: 'Imagenes/green-home.png',
                 iconSize: [48, 48],
                 iconAnchor: [24, 47],
                 popupAnchor: [0, -45]
             });
-            var blueHogar = L.icon({// Hogar con 1-3 Tareas
+            var blueHogar = L.icon({                // Hogar con 1-3 Tareas
                 iconUrl: 'Imagenes/blue-home.png',
                 iconSize: [48, 48],
                 iconAnchor: [24, 47],
                 popupAnchor: [0, -45]
             });
-            var redHogar = L.icon({// Hogar con +3 Tareas
+            var redHogar = L.icon({                 // Hogar con +3 Tareas
                 iconUrl: 'Imagenes/red-home.png',
                 iconSize: [48, 48],
                 iconAnchor: [24, 47],

@@ -240,7 +240,6 @@
 			    d;
 
 			for (i = this._route.geometry.length - 1; i >= 0 ; i--) {
-				// TODO: maybe do this in pixel space instead?
 				d = latlng.distanceTo(this._route.geometry[i]);
 				if (d < minDist) {
 					minIndex = i;
@@ -360,7 +359,6 @@
 		_clearAlts: function() {
 			var i,
 				alt;
-			// TODO: this is really inelegant
 			for (i = 0; this._container && i < this._container.children.length; i++) {
 				alt = this._container.children[i];
 				if (L.DomUtil.hasClass(alt, 'leaflet-routing-alt')) {
@@ -407,7 +405,6 @@
 				L.DomUtil[isCurrentSelection ? 'removeClass' : 'addClass'](n, 'leaflet-routing-alt-minimized');
 
 				if (isCurrentSelection) {
-					// TODO: don't fire if the currently active is clicked
 					this.fire('routeselected', {route: this._routes[j]});
 				}
 			}
@@ -800,7 +797,6 @@
 							this._geocoderResultsOpen = true;
 							L.DomEvent.addListener(geocoderElem, 'blur', function() {
 								// Don't remove before onResultSelected has got a chance to fire
-								// TODO: this looks like a hack
 								setTimeout(function() {
 									gr.remove();
 									_this._geocoderResultsOpen = false;
